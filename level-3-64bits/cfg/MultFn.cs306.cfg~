@@ -1,8 +1,8 @@
-int x;
+
 void fn1();
 void fn2();
 void fn3();
-	
+int x;	
 fn1()
 {
    int d;

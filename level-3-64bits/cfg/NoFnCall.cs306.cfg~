@@ -1,6 +1,6 @@
-int x;
-void fn();
 
+void fn();
+int x;
 fn()
 {
    int a;

@@ -33,6 +33,7 @@
 	Ast * ast;
 	Symbol_Table * symbol_table;
 	Symbol_Table_Entry * symbol_entry;
+	list<Symbol_Table_Entry *> symbol_entry_list;
 	Basic_Block * basic_block;
 	list<Basic_Block *> * basic_block_list;
 	Procedure * procedure;
@@ -50,20 +51,21 @@
 %type <basic_block> basic_block
 %type <ast_list> executable_statement_list
 %type <ast_list> assignment_statement_list
-%type <ast_list> parameter_statement_list
+%type <symbol_entry_list> parameter_statement_list
 %type <ast> assignment_statement
 %type <ast> goto_statement
 %type <ast> unary_expression
 %type <ast> if_statement
 %type <ast> variable
+%type <ast> variable1
 %type <ast> for_precedence
 %type <ast> constant
-%type <ast> arg_list
+%type <ast_list> arg_list
 %type <ast> any
 %type <ast> relational_expression
 %type <ast> arithmetic_expression
 %type <ast> function_declaration 
-%type <ast> parameter_statement
+%type <symbol_entry> parameter_statement
 
 %left EQ NE
 %left GT GE LT LE
@@ -77,10 +79,31 @@
 
 program:
 	func_decl_statement_list procedure_list
+	{
+		// #if 0
+		
+		// #endif
+	}
 |
 	declaration_statement_list func_decl_statement_list procedure_list
+	{
+		// #if 0
+		program_object.set_global_table(*$1);
+		if (!$1)
+			report_internal_error("parsing wrong");
+
+		$1->global_list_in_proc_map_check(get_line_number()); // checks the presence of variable name is not same as any function
+
+		delete $1 ;
+		// #endif
+	}
 |
 	procedure_list
+	{
+		// #if 0
+		
+		// #endif
+	}
 ;
 	
 procedure_list:
@@ -90,79 +113,66 @@ procedure_list:
 ;
 
 procedure_fun:
-	declaration_statement_list procedure_name
-	{
-		#if 0
-		program_object.set_global_table(*$1);
-		return_statement_used_flag = false;
-		#endif
-	}
-	procedure_body
-	{
-		#if 0
-		program_object.set_procedure_map(*current_procedure);
-
-		if (!$1)
-			report_internal_error("parsing wrong");
-
-		$1->global_list_in_proc_map_check(get_line_number());
-
-		delete $1 ;
-		#endif
-	} 
-|
 	procedure_name
 	{
 	return_statement_used_flag = false;
 	}
 	procedure_body
 	{
-		#if 0
-		program_object.set_procedure_map(*current_procedure);
-		#endif
+		// #if 0
+		
+		
+		// #endif
 	};
 
 
 procedure_name:
 	NAME '(' parameter_statement_list ')'
 		{
-		#if 0
-		current_procedure = new Procedure(void_data_type, *$1);
-		#endif
+		// #if 0
+		if (*$1 == "main"){
+				current_procedure = new Procedure(void_data_type, *$1, *$3);
+				program_object.set_procedure_map(*current_procedure);
+			}
+		else {
+			// error checking for existence
+				current_procedure = program_object.get_procedure(*$1);
+		}
+		// #endif
 	}
 ;
 
 procedure_body:
 	'{' declaration_statement_list
 	{
-		#if 0
+		// #if 0
 		current_procedure->set_local_list(*$2);
 		delete $2;
-		#endif
+		// #endif
 	}
 	basic_block_list '}'
 	{
-		#if 0
+		// #if 0
 		current_procedure->set_basic_block_list(*$4);
 
 		delete $4;
-		#endif
+		// #endif
 	}
 |
 	'{' basic_block_list '}'
 		{
-		#if 0
+		// #if 0
 		current_procedure->set_basic_block_list(*$2);
 
 		delete $2;
-		#endif
+		// #endif
 		}
 ;
 
 declaration_statement_list:
 	declaration_statement
 	{
-		#if 0
+		// #if 0
 		int line = get_line_number();
 		if (!$1)
 			report_error("declaration_statement cannot be null", line);
@@ -175,12 +185,12 @@ declaration_statement_list:
 
 		$$ = new Symbol_Table();
 		$$->push_symbol($1);
-		#endif
+		// #endif
 	}
 |
 	declaration_statement_list declaration_statement
 	{
-		#if 0
+		// #if 0
 		// if declaration is local then no need to check in global list
 		// if declaration is global then this list is global list
 
@@ -206,7 +216,7 @@ declaration_statement_list:
 			$$ = new Symbol_Table();
 
 		$$->push_symbol($2);
-		#endif
+		// #endif
 	}
 ;
 
@@ -214,73 +224,111 @@ func_decl_statement_list:
 	func_decl_statement_list function_declaration 
 |	
 	function_declaration
+	{
+		// #if 0
+		// #endif
+	}
 ;
 
 function_declaration:
 	INTEGER NAME '(' parameter_statement_list ')' ';'
+	{
+		// #if 0
+		Procedure *temp = new Procedure (int_data_type,*$2,*$4);
+		program_object.set_procedure_map(*temp);
+		
+		// #endif
+	}
 |
 	FLOAT NAME '(' parameter_statement_list ')' ';'
+	{
+		// #if 0
+		Procedure *temp = new Procedure (float_data_type,*$2,*$4);
+		program_object.set_procedure_map(*temp);
+		
+		// #endif
+	}
 |
 	VOID NAME '(' parameter_statement_list ')' ';'
+	{
+		// #if 0
+		Procedure *temp = new Procedure (void_data_type,*$2,*$4);
+		program_object.set_procedure_map(*temp);
+		
+		// #endif
+	}
 ;
 
 parameter_statement_list:
 	parameter_statement
+	{
+		// #if 0
+		$$=new list<Symbol_Table_Entry* >();
+		$$->push_back($1);	
+		// #endif
+	}
 |
-	parameter_statement ',' parameter_statement_list
-
+	 parameter_statement_list ',' parameter_statement 
+	{
+		// #if 0
+		if ($1){
+			$$=$1;
+		}
+		else{
+			$$=new list<Symbol_Table_Entry* >();
+		}	
+		$$->push_back($3);	
+		// #endif
+	}
 ;
+
 parameter_statement:
 	INTEGER NAME
+	{
+		// #if 0
+		$$ = new Symbol_Table_Entry(*$2,int_data_type);
+		
+		// #endif
+	}
 |
 	FLOAT NAME
-|
-;
-
-arg_list:
-	for_precedence
 	{
-	#if 0
-	$$=$1;
-	#endif
+		// #if 0
+		$$ = new Symbol_Table_Entry(*$2,float_data_type);
+		// #endif
 	}
 
-| 
-	arg_list ',' for_precedence
-	{
-	#if 0
-	$$=$1;
-	#endif
-	}
 |
+
 	{
-	#if 0
-	$$=NULL;
-	#endif
+		// #if 0
+		$$ = NULL;
+		
+		// #endif
 	}
 ;
 
 declaration_statement:
 	INTEGER NAME ';'
 	{
-		 #if 0
+		 // #if 0
 		if(!$2)
 			report_error("variable name cannot be null", get_line_number());
 
 		$$ = new Symbol_Table_Entry(*$2, int_data_type);
 		delete $2;
-		#endif
+		// #endif
 	}
 |
 	FLOAT NAME ';'
 	{
-	 #if 0
+	 // #if 0
 		if(!$2)
 			report_error("variable name cannot be null", get_line_number());
 
 		$$ = new Symbol_Table_Entry(*$2, float_data_type);
 		delete $2;
-		 #endif
+		 // #endif
 	}
 ;
 
@@ -289,7 +337,7 @@ declaration_statement:
 basic_block_list:
 	basic_block_list basic_block
 	{
-		 #if 0
+		 // #if 0
 		if (!$2)
 			report_error("Basic block doesn't exist", get_line_number());
 
@@ -297,18 +345,18 @@ basic_block_list:
 
 		$$ = $1;
 		$$->push_back($2);
-		#endif
+		// #endif
 	}
 |
 	basic_block
 	{
-		#if 0
+		// #if 0
 		if (!$1)
 			report_error("Basic block doesn't exist", get_line_number());
 
 		$$ = new list<Basic_Block *>;
 		$$->push_back($1);
-		#endif
+		// #endif
 	}
 	
 ;
@@ -316,16 +364,16 @@ basic_block_list:
 basic_block:
 	BASIC_BLOCK ':' executable_statement_list
 	{
-		#if 0
+		// #if 0
 		$$ = new Basic_Block($1,*$3);
-		#endif
+		// #endif
 	}
 /*|
 	BASIC_BLOCK ':' if_statement
 	{
-		#if 0
+		// #if 0
 		$$ = new Basic_Block($1,*$3);
-		#endif
+		// #endif
 	}*/
 
 	
@@ -335,14 +383,14 @@ basic_block:
 executable_statement_list:
 	assignment_statement_list
 	{
-		#if 0
+		// #if 0
 		$$ = $1;
-		#endif
+		// #endif
 	}
 |
 	assignment_statement_list RETURN ';'
 	{
-		#if 0
+		// #if 0
 		Ast * ret = new Return_Ast();
 
 		if ($1)
@@ -352,7 +400,7 @@ executable_statement_list:
 			$$ = new list<Ast *>;
 
 		$$->push_back(ret);
-		#endif
+		// #endif
 	}
 | 
 	assignment_statement_list RETURN for_precedence';'
@@ -360,7 +408,7 @@ executable_statement_list:
 	
 assignment_statement_list if_statement
 {
-		#if 0
+		// #if 0
 		if ($1)
 			$$ = $1;
 
@@ -368,12 +416,12 @@ assignment_statement_list if_statement
 			$$ = new list<Ast *>;
 
 		$$->push_back($2);
-		 #endif
+		 // #endif
 	}
 |  
 assignment_statement_list goto_statement
 {
-		#if 0
+		// #if 0
 		if ($1)
 			$$ = $1;
 
@@ -381,7 +429,7 @@ assignment_statement_list goto_statement
 			$$ = new list<Ast *>;
 
 		$$->push_back($2);
-		 #endif
+		 // #endif
 }
 ;
 
@@ -393,57 +441,57 @@ if_statement:
 	ELSE
 		GOTO BASIC_BLOCK ';'
 {
-		#if 0
+		// #if 0
 			$$ = new Conditional_Goto_Ast($3, $6, $10);
-		#endif
+		// #endif
 }
 ;
 
 goto_statement:
 	GOTO BASIC_BLOCK ';'
 	{
-		#if 0
+		// #if 0
 		$$ = new Unconditional_Goto_Ast($2);
 		
-		#endif
+		// #endif
 	}
 ;
 
 relational_expression:
 	arithmetic_expression
 	{
-		#if 0
+		// #if 0
 		$$ = $1;
-		#endif
+		// #endif
 	} 
 |
 	relational_expression LE relational_expression
 	{
-		#if 0
+		// #if 0
 		$$ = new Relation_Expression_Ast( $1,  $3, relop::LE);
-		#endif
+		// #endif
 	}
 |
 	relational_expression GE relational_expression
 	{
-		 #if 0
+		 // #if 0
 		$$ = new Relation_Expression_Ast((Ast *) $1, (Ast *) $3, relop::GE);
-		#endif
+		// #endif
 	}
 
 |
 	relational_expression LT relational_expression
 	{
-		#if 0
+		// #if 0
 		$$ = new Relation_Expression_Ast((Ast *) $1, (Ast *) $3, relop::LT);
-		#endif
+		// #endif
 	}
 |
 	relational_expression GT relational_expression
 	{
-		#if 0
+		// #if 0
 		$$ = new Relation_Expression_Ast((Ast *) $1, (Ast *) $3, relop::GT);
-		#endif
+		// #endif
 	}
 
 ;
@@ -452,51 +500,51 @@ relational_expression:
 arithmetic_expression:
 	arithmetic_expression '+' arithmetic_expression
 	{
-			#if 0
+			// #if 0
 		$$= new Arithmetic_Expression_Ast((Ast *) $1, (Ast *) $3, arithop::PLUS);
-		#endif
+		// #endif
 	}
 |
 	arithmetic_expression '-' arithmetic_expression
 	{
-			#if 0
+			// #if 0
 		$$=new Arithmetic_Expression_Ast((Ast *) $1, (Ast *) $3, arithop::MINUS);
-		#endif
+		// #endif
 	}
 |
 	arithmetic_expression '*' arithmetic_expression
 	{
-			#if 0
+			// #if 0
 		$$=new Arithmetic_Expression_Ast((Ast *) $1, (Ast *) $3, arithop::MULT);
-		#endif
+		// #endif
 	}
 |
 	arithmetic_expression '/' arithmetic_expression
 	{
-			#if 0
+			// #if 0
 		$$=new Arithmetic_Expression_Ast((Ast *) $1, (Ast *) $3, arithop::DIV);
-		#endif
+		// #endif
 	}
 |
 	unary_expression
 	{
-			#if 0
+			// #if 0
 		$$=$1;
-		#endif 
+		// #endif 
 	}
 |
 '('for_precedence')'
 	{
-			#if 0
+			// #if 0
 		$$=$2;
-		#endif
+		// #endif
 	}
 |
 	any
 	{
-			#if 0
+			// #if 0
 		$$=$1;
-		#endif
+		// #endif
 	}
 ;
 
@@ -513,82 +561,82 @@ unary_expression:
 |
 	'('FLOAT')' '('arithmetic_expression')'
 	{
-			#if 0
+			// #if 0
 		$$=new Typecast_Ast((Ast *) $5, typecast_type::FLOAT);
-		#endif 
+		// #endif 
 	}
 |
 	'('DOUBLE')' '('arithmetic_expression')'
 	{
-			#if 0
+			// #if 0
 		$$=new Typecast_Ast((Ast *) $5, typecast_type::DOUBLE);
-		#endif
+		// #endif
 	}
 |
 	'('INTEGER')' '('arithmetic_expression')'
 	{
-			#if 0
+			// #if 0
 		$$=new Typecast_Ast((Ast *) $5, typecast_type::INTEGER);
-		#endif
+		// #endif
 	}
 	|
 	'('FLOAT')' any
 	{
-			#if 0
+			// #if 0
 		$$=new Typecast_Ast((Ast *) $4, typecast_type::FLOAT);
-		#endif 
+		// #endif 
 	}
 |
 	'('DOUBLE')' any
 	{
-			#if 0
+			// #if 0
 		$$=new Typecast_Ast((Ast *) $4, typecast_type::DOUBLE);
-		#endif
+		// #endif
 	}
 |
 	'('INTEGER')' any
 	{
-			#if 0
+			// #if 0
 		$$=new Typecast_Ast((Ast *) $4, typecast_type::INTEGER);
-		#endif
+		// #endif
 	}
 ;
 
 for_precedence:
 	relational_expression
 	{
-		#if 0
+		// #if 0
 		$$=$1;
-		#endif
+		// #endif
 	}
 |
 	for_precedence NE for_precedence
 	{
-		#if 0
+		// #if 0
 		$$ = new Relation_Expression_Ast((Ast *) $1, (Ast *) $3, relop::NE);
-		#endif
+		// #endif
 	}
 |
 	for_precedence EQ for_precedence
 	{
-		#if 0
+		// #if 0
 		$$ = new Relation_Expression_Ast((Ast *) $1, (Ast *) $3, relop::EQ);
-		#endif
+		// #endif
 	}
 
 ;
 	
 assignment_statement_list:
 {
-		#if 0
+		// #if 0
 		$$ = NULL;
-	#endif
+	// #endif
 		
 	}
 |
 	assignment_statement_list assignment_statement
 	{
-		#if 0
+		// #if 0
 		if (!$1)
 			$$ = new list<Ast *>;
 
@@ -596,14 +644,45 @@ assignment_statement_list:
 			$$ = $1;
 
 		$$->push_back($2);
-		#endif
+		// #endif
+	}
+;
+
+
+arg_list:
+	for_precedence
+	{
+	// #if 0
+	$$= new list<Ast *>;
+	$$->push_back($1);
+	// #endif
+	}
+
+| 
+	arg_list ',' for_precedence
+	{
+	// #if 0
+	if ($1) {
+		$$ = $1;
+	}
+	else
+		$$ = new list<Ast *>;
+	$$->push_back($2);
+	// #endif
+	}
+|
+	{
+	// #if 0
+	$$=new list<Ast *>;
+	$$->clear();
+	// #endif
 	}
 ;
 
 assignment_statement:
-	variable ASSIGN_OP for_precedence ';'
+	variable1 ASSIGN_OP for_precedence ';'
 	{
-	#if 0
+	// #if 0
 		if (!$1 || !$3)
 			report_error("lhs/rhs cannot be null", get_line_number());
 
@@ -611,25 +690,19 @@ assignment_statement:
 
 		int line = get_line_number();
 		$$->check_ast(line);
-	#endif
+	// #endif
 	}
 |
 	NAME '(' arg_list ')' ';'
 	{
-	#if 0
-		if (!$1 || !$3)
-			report_error("lhs/rhs cannot be null", get_line_number());
-
-		$$ = $1;
-
-		int line = get_line_number();
-		$$->check_ast(line);
-	#endif
+	// #if 0
+		$$ = new Function_Call_Ast(*$3,program_object.get_procedure(*$1));
+	// #endif
 	}
 ;
 
 
-variable:
+variable1:
 	NAME
 	{
 		#if 0
@@ -652,11 +725,20 @@ variable:
 		delete $1;
 		#endif
 	}
+;
+
+variable:
+	variable1
+	{
+	#if 0
+	$$=$1;
+	#endif
+	}
 |
 	NAME '(' arg_list ')'
 	{
 	#if 0
-	$$=$1;
+	$$ = new Function_Call_Ast(*$3,program_object.get_procedure(*$1));
 	#endif
 	}
 ;
@@ -664,32 +746,32 @@ variable:
 constant:
 	INTEGER_NUMBER
 	{
-		#if 0
+		// #if 0
 		$$ = new Number_Ast<int>($1, int_data_type);
-		#endif
+		// #endif
 	}
 |
 	FLOAT_NUMBER
 	{
-			#if 0
+			// #if 0
 		$$ = new Number_Ast<float>($1, float_data_type);
-		#endif
+		// #endif
 	}
 ;
 
 any:
 	variable
 	{
-		 #if 0
+		 // #if 0
 		 	$$ = $1;
-		 #endif
+		 // #endif
 	}
 |
 	constant
 	{
-		 #if 0
+		 // #if 0
 		$$ = $1;
-		 #endif
+		 // #endif
 	}
 
 ;
