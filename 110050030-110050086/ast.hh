@@ -107,7 +107,7 @@ class Function_Call_Ast:public Ast
     ~Function_Call_Ast();
     void print_ast(ostream & file_buffer);
     Eval_Result & evaluate(Local_Environment & eval_env, ostream & file_buffer);
-}
+};
 
 class Arithmetic_Expression_Ast:public Ast
 {

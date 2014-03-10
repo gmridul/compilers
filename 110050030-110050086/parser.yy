@@ -64,7 +64,6 @@
 %type <ast> any
 %type <ast> relational_expression
 %type <ast> arithmetic_expression
-%type <ast> function_declaration 
 %type <symbol_entry> parameter_statement
 
 %left EQ NE
@@ -667,7 +666,7 @@ arg_list:
 	}
 	else
 		$$ = new list<Ast *>;
-	$$->push_back($2);
+	$$->push_back($3);
 	// #endif
 	}
 |
