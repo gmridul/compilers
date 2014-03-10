@@ -4,8 +4,6 @@
                                 cfglp : A CFG Language Processor
                                 --------------------------------
 
-           About:
-
            Implemented   by  Tanu  Kanvar (tanu@cse.iitb.ac.in) and Uday
            Khedker    (http://www.cse.iitb.ac.in/~uday)  for the courses
            cs302+cs306: Language  Processors  (theory and  lab)  at  IIT
