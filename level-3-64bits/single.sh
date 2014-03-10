@@ -1,9 +1,9 @@
 #!/bin/bash
 
 
-./cfglp -tokens $1
-mv $1.toks my.out
-./cfglp64 -tokens $1
-mv $1.toks sir.out
+#./cfglp -ast $1
+#mv $1.ast my.out
+./cfglp64 -ast $1
+mv $1.ast sir.out
 diff -bB my.out sir.out
 

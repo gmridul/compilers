@@ -9,5 +9,8 @@ We added Eval_Result_BB in local_environment.hh file and added grammar for level
 
 Also added code for goto statements in procedure.cc file
 
-Added grammar for arithmetic and foat
+Added grammar for arithmetic and float
 Added implementation for arithmetic expressions and typecating and unary minus.
+
+Added grammar for functions declrations and definitions
+Added actions and methods to evaluate functions

@@ -36,11 +36,12 @@ using namespace std;
 #include"procedure.hh"
 #include"program.hh"
 
-Procedure::Procedure(Data_Type proc_return_type, string proc_name)
+Procedure::Procedure(Data_Type proc_return_type, string proc_name, list<Symbol_Table_Entry * > plist)
 {
 	eval_env = *new Local_Environment();
 	return_type = proc_return_type;
 	name = proc_name;
+    parameter_list = plist;
 }
 
 Procedure::~Procedure()
@@ -64,6 +65,9 @@ void Procedure::set_local_list(Symbol_Table & new_list)
 {
 	local_symbol_table = new_list;
 	local_symbol_table.set_table_scope(local);
+    for(list<Symbol_Table_Entry *>::iterator it=parameter_list.begin();it!=parameter_list.end();it++) {
+        local_symbol_table.push_symbol(*it);
+    }
 }
 
 Data_Type Procedure::get_return_type()
@@ -90,8 +94,10 @@ void Procedure::print_ast(ostream & file_buffer)
 		(*i)->print_bb(file_buffer);
 }
 
-void Procedure::put_variable_value(Eval_Result_Value & value, string name) {
-    eval_env.put_variable_value(value,name);
+void Procedure::put_variable_value(list<Eval_Result> & value) {
+    for(list<Eval_Result>::iterator it=value.begin(),list<Symbol_Table_Entry * > it1=parameter_list.begin(); it!=value.end()||it1!=parameter_list.end();it++,it1++) {
+        eval_env.put_variable_value(*it,(*it1)->get_variable_name);
+    }
 }
 	
 Basic_Block & Procedure::get_start_basic_block()
@@ -134,7 +140,7 @@ Basic_Block * Procedure::goto_bb(Basic_Block & current_bb, Eval_Result* result)
             }
         }
     }
-    else {     
+    else {
 
         for(i = basic_block_list.begin(); i != basic_block_list.end(); i++)
         {

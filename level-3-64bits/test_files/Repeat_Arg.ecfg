@@ -1,24 +1,19 @@
-int b;
-
 void fn();
-
-fn()
+void fn2(int a, int a);
+fn2(int a, int a)
 {
-
+   int b;
 <bb 2>:
-   b = 3;
+   b = 2;
    return;
-
 }
-
 main()
 {
    int a;
 
 <bb 2>:
    a = 3;
-   fn();
+   fn2(a, a);
    return;
 
 }
-
