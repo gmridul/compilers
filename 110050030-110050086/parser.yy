@@ -33,7 +33,7 @@
 	Ast * ast;
 	Symbol_Table * symbol_table;
 	Symbol_Table_Entry * symbol_entry;
-	list<Symbol_Table_Entry *> * symbol_entry_list;
+	list<Symbol_Table_Entry *> *symbol_entry_list;
 	Basic_Block * basic_block;
 	list<Basic_Block *> * basic_block_list;
 	Procedure * procedure;
@@ -403,6 +403,19 @@ executable_statement_list:
 	}
 | 
 	assignment_statement_list RETURN for_precedence';'
+	{
+		// #if 0
+		Ast * ret = new Return_Ast($3);
+
+		if ($1)
+			$$ = $1;
+
+		else
+			$$ = new list<Ast *>;
+
+		$$->push_back(ret);
+		// #endif
+	}
 |
 	
 assignment_statement_list if_statement
