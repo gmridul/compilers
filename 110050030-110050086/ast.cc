@@ -528,8 +528,8 @@ void Return_Ast::print_ast(ostream & file_buffer)
 
 Eval_Result & Return_Ast::evaluate(Local_Environment & eval_env, ostream & file_buffer)
 {
-    print_ast(file_buffer);
-    Eval_Result & result = *new Eval_Result_Return(); //define this eval result
+    
+    Eval_Result & result = *new Eval_Result_BB(); //define this eval result
     result = rhs->evaluate(eval_env,file_buffer);
     result.set_result_enum(goto_result);
     return result;

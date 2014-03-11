@@ -13,5 +13,5 @@ main()
 {
 	int a = 10;
 	prod = 1;
-	printf("%d",a);
+	fact(a);
 }

@@ -129,14 +129,10 @@ procedure_name:
 	NAME '(' parameter_statement_list ')'
 		{
 		// #if 0
-		if (*$1 == "main"){
-				current_procedure = new Procedure(void_data_type, *$1, *$3);
-				program_object.set_procedure_map(*current_procedure);
-			}
-		else {
-			// error checking for existence
+			
+		// error checking for existence
 				current_procedure = program_object.get_procedure(*$1);
-		}
+		
 		// #endif
 	}
 ;
@@ -699,6 +695,7 @@ assignment_statement:
 			report_error("lhs/rhs cannot be null", get_line_number());
 
 		$$ = new Assignment_Ast($1, $3);
+		//std::cout<<$1 <<":\t:"<<$3<<std::endl;
 
 		int line = get_line_number();
 		$$->check_ast(line);
@@ -717,9 +714,8 @@ assignment_statement:
 variable1:
 	NAME
 	{
-		#if 0
+		// #if 0
 		Symbol_Table_Entry var_table_entry;
-
 		if(!$1)
 			report_error("variable name cannot be null", get_line_number());
 
@@ -735,23 +731,23 @@ variable1:
 		$$ = new Name_Ast(*$1, var_table_entry);
 
 		delete $1;
-		#endif
+		// #endif
 	}
 ;
 
 variable:
 	variable1
 	{
-	#if 0
+	// #if 1
 	$$=$1;
-	#endif
+	// #endif
 	}
 |
 	NAME '(' arg_list ')'
 	{
-	#if 0
+	// #if 0
 	$$ = new Function_Call_Ast(*$3,program_object.get_procedure(*$1));
-	#endif
+	// #endif
 	}
 ;
 
