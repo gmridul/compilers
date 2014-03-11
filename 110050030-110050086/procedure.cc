@@ -38,7 +38,7 @@ using namespace std;
 
 Procedure::Procedure(Data_Type proc_return_type, string proc_name, list<Symbol_Table_Entry * > plist)
 {
-	eval_env = *new Local_Environment();
+	eval_env = new Local_Environment();
 	return_type = proc_return_type;
 	name = proc_name;
     parameter_list = plist;
@@ -65,7 +65,9 @@ void Procedure::set_local_list(Symbol_Table & new_list)
 {
 	local_symbol_table = new_list;
 	local_symbol_table.set_table_scope(local);
-    for(list<Symbol_Table_Entry *>::iterator it=parameter_list.begin();it!=parameter_list.end();it++) {
+    //list<Symbol_Table_Entry * > parameter_list;
+    list<Symbol_Table_Entry * >::iterator it=parameter_list.begin();
+    for(;it!=parameter_list.end();it++) {
         local_symbol_table.push_symbol(*it);
     }
 }
@@ -94,9 +96,11 @@ void Procedure::print_ast(ostream & file_buffer)
 		(*i)->print_bb(file_buffer);
 }
 
-void Procedure::put_variable_value(list<Eval_Result> & value) {
-    for(list<Eval_Result>::iterator it=value.begin(),list<Symbol_Table_Entry * > it1=parameter_list.begin(); it!=value.end()||it1!=parameter_list.end();it++,it1++) {
-        eval_env.put_variable_value(*it,(*it1)->get_variable_name);
+void Procedure::put_variable_value(list<Eval_Result* > & value) {
+    list<Eval_Result* >::iterator it=value.begin();
+    list<Symbol_Table_Entry * >::iterator it1=parameter_list.begin();
+    for(; it!=value.end()||it1!=parameter_list.end();it++,it1++) {
+        eval_env->put_variable_value(**it,(*it1)->get_variable_name());
     }
 }
 	
@@ -159,25 +163,25 @@ Basic_Block * Procedure::goto_bb(Basic_Block & current_bb, Eval_Result* result)
 
 Eval_Result & Procedure::evaluate(ostream & file_buffer)
 {
-	local_symbol_table.create(eval_env);
+	local_symbol_table.create(*eval_env);
 	
 	Eval_Result * result = NULL;
 
 	file_buffer << PROC_SPACE << "Evaluating Procedure " << name << "\n";
 	file_buffer << LOC_VAR_SPACE << "Local Variables (before evaluating):\n";
-	eval_env.print(file_buffer);
+	eval_env->print(file_buffer);
 	file_buffer << "\n";
 	
 	Basic_Block * current_bb = &(get_start_basic_block());
 	while (current_bb)
 	{
-		result = &(current_bb->evaluate(eval_env, file_buffer));
+		result = &(current_bb->evaluate(*eval_env, file_buffer));
 		current_bb = goto_bb(*current_bb, result);		
 	}
 
 	file_buffer << "\n\n";
 	file_buffer << LOC_VAR_SPACE << "Local Variables (after evaluating):\n";
-	eval_env.print(file_buffer);
+	eval_env->print(file_buffer);
 
 	return *result;
 }

@@ -129,7 +129,7 @@ public:
 
 class Local_Environment
 {
-	map<string, Eval_Result_Value *> variable_table;
+	map<string, Eval_Result *> variable_table;
 
 public:
 	Local_Environment();
@@ -137,8 +137,8 @@ public:
 
 	void print(ostream & file_buffer);
 	bool is_variable_defined(string name);
-	Eval_Result_Value * get_variable_value(string name);
-	void put_variable_value(Eval_Result_Value & value, string name);
+	Eval_Result * get_variable_value(string name);
+	void put_variable_value(Eval_Result & value, string name);
 	bool does_variable_exist(string name);
 };
 

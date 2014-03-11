@@ -65,7 +65,7 @@ void Program::set_procedure_map(Procedure & proc)
 
 Procedure * Program::get_procedure(string s)
 {
-    list<Ast* >::iterator it=procedure_map.find(s);
+    map<string, Procedure *>::iterator it=procedure_map.find(s);
     if(it==procedure_map.end())
         report_internal_error("Function not found");
     return it->second;

@@ -144,9 +144,9 @@ void Function_Call_Ast::print_ast(ostream & file_buffer) {
 }
 
 Eval_Result & Function_Call_Ast::evaluate(Local_Environment & eval_env, ostream & file_buffer) {
-    list<Eval_Result>& evaluated = *new list<Eval_Result>();
+    list<Eval_Result * >& evaluated = *new list<Eval_Result * >();
     for(list<Ast *>::iterator it=parameter_list.begin();it!=parameter_list.end();it++) {
-        evaluated.push_back((*it)->evaluate(eval_env,file_buffer));
+        evaluated.push_back(&((*it)->evaluate(eval_env,file_buffer)));
     }
     p->put_variable_value(evaluated);
     return p->evaluate(file_buffer);
@@ -383,8 +383,8 @@ void Name_Ast::print_ast(ostream & file_buffer)
 
 void Name_Ast::print_value(Local_Environment & eval_env, ostream & file_buffer)
 {
-    Eval_Result_Value * loc_var_val = eval_env.get_variable_value(variable_name);
-    Eval_Result_Value * glob_var_val = interpreter_global_table.get_variable_value(variable_name);
+    Eval_Result * loc_var_val = eval_env.get_variable_value(variable_name);
+    Eval_Result * glob_var_val = interpreter_global_table.get_variable_value(variable_name);
 
     file_buffer << "\n" << AST_SPACE << variable_name << " : ";
 
@@ -526,15 +526,15 @@ void Return_Ast::print_ast(ostream & file_buffer)
     else rhs->print_ast(file_buffer);
 }
 
-/*Eval_Result & Return_Ast::evaluate(Local_Environment & eval_env, ostream & file_buffer)
+Eval_Result & Return_Ast::evaluate(Local_Environment & eval_env, ostream & file_buffer)
 {
     print_ast(file_buffer);
-    Eval_Result * result = *new Eval_Result();
-    *result = rhs->evaluate(eval_env,file_buffer);
+    Eval_Result & result = *new Eval_Result_Return(); //define this eval result
+    result = rhs->evaluate(eval_env,file_buffer);
     result.set_result_enum(goto_result);
-    return *result;
+    return result;
 }
-*/
+
 template class Number_Ast<int>;
 template class Number_Ast<float>;
 
