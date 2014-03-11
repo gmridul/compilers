@@ -96,7 +96,7 @@ bool Assignment_Ast::check_ast(int line)
 
 void Assignment_Ast::print_ast(ostream & file_buffer)
 {
-    file_buffer << AST_SPACE << "Asgn:\n";
+    file_buffer << "\n"<<AST_SPACE << "Asgn:\n";
 
     file_buffer << AST_NODE_SPACE"LHS (";
     lhs->print_ast(file_buffer);
@@ -140,12 +140,12 @@ Data_Type Function_Call_Ast::get_data_type() {
 }
 
 void Function_Call_Ast::print_ast(ostream & file_buffer) {
-    file_buffer<<AST_NODE_SPACE<<"FN CALL: "<<p->get_proc_name()<<"(";
+    file_buffer<<AST_NODE_SPACE<<"\n"<<AST_SPACE<<"FN CALL: "<<p->get_proc_name()<<"(";
     for(list<Ast *>::iterator it=parameter_list.begin();it!=parameter_list.end();it++) {
 		file_buffer<<"\n"<<AST_NODE_SPACE;
         (*it)->print_ast(file_buffer);
     }
-    file_buffer<<")\n";
+    file_buffer<<")";
 }
 
 Eval_Result & Function_Call_Ast::evaluate(Local_Environment & eval_env, ostream & file_buffer) {
@@ -534,10 +534,11 @@ Data_Type Return_Ast::get_data_type() {
 
 void Return_Ast::print_ast(ostream & file_buffer)
 {
-    file_buffer << AST_SPACE;
+    file_buffer << "\n\n"<<AST_SPACE;
     file_buffer<< "RETURN ";
-    if(rhs==NULL) file_buffer<< "<NOTHING>\n\n";
+    if(rhs==NULL) file_buffer<< "<NOTHING>";
     else rhs->print_ast(file_buffer);
+    file_buffer<<"\n\n";
 }
 
 Eval_Result & Return_Ast::evaluate(Local_Environment & eval_env, ostream & file_buffer)

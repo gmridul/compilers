@@ -80,7 +80,7 @@ program:
 	func_decl_statement_list procedure_list
 	{
 		// #if 0
-		std::cout<<"I am here1\n";
+	
 		// #endif
 	}
 |
@@ -88,7 +88,7 @@ program:
 	declaration_statement_list func_decl_statement_list 
 	{
 		// #if 0
-		std::cout<<"I am here2\n";
+	
 		program_object.set_global_table(*$1);
 		if (!$1)
 			report_internal_error("parsing wrong");
