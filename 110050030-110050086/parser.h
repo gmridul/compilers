@@ -55,32 +55,32 @@ using namespace std;
 #undef Parser
 class Parser: public ParserBase
 {
-	Scanner d_scanner;
+    Scanner d_scanner;
 
     public:
-	Parser(string input_file_name)
-	{
-		d_scanner.switchStreams(input_file_name, "");
-		d_scanner.setSval(&d_val__);
-	}
+    Parser(string input_file_name)
+    {
+        d_scanner.switchStreams(input_file_name, "");
+        d_scanner.setSval(&d_val__);
+    }
 
-        int parse();
-        void print();
+    int parse();
+    void print();
 
-	int get_line_number();					// Used for errors
+    int get_line_number();					// Used for errors
 
     private:
-        void error(char const *msg);
-        int lex();
+    void error(char const *msg);
+    int lex();
 
-	bool return_statement_used_flag;				// Keeps track that atleast a procedure has atleast 1 return statement
-	void bb_strictly_increasing_order_check(list<Basic_Block *> * bb_list, int bb_number); 
-        
-	void executeAction(int ruleNr);
-        void errorRecovery();
-        int lookup(bool recovery);
-        void nextToken();
-        void print__();
+    bool return_statement_used_flag;				// Keeps track that atleast a procedure has atleast 1 return statement
+    void bb_strictly_increasing_order_check(list<Basic_Block *> * bb_list, int bb_number); 
+
+    void executeAction(int ruleNr);
+    void errorRecovery();
+    int lookup(bool recovery);
+    void nextToken();
+    void print__();
 };
 
 

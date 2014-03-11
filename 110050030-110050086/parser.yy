@@ -33,7 +33,7 @@
 	Ast * ast;
 	Symbol_Table * symbol_table;
 	Symbol_Table_Entry * symbol_entry;
-	list<Symbol_Table_Entry *> symbol_entry_list;
+	list<Symbol_Table_Entry *> * symbol_entry_list;
 	Basic_Block * basic_block;
 	list<Basic_Block *> * basic_block_list;
 	Procedure * procedure;
