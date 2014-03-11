@@ -40,9 +40,7 @@ void Eval_Result::set_value(int number)
 	report_internal_error("Should not reach, Eval_Result : set_value");
 }
 
-float Eval_Result::get_floatvalue()
-{
-	report_internal_error("Should not reach, Eval_Result : get_value");
+float Eval_Result::get_floatvalue() { report_internal_error("Should not reach, Eval_Result : get_value");
 }
 
 void Eval_Result::set_floatvalue(float number)
@@ -59,7 +57,56 @@ void Eval_Result::set_variable_status(bool def)
 	report_internal_error("Should not reach, Eval_Result : set_variable_status");
 }
 ///////////////////////////////////////////////////////////////////////////////
+Eval_Result_Return::Eval_Result_Return() {
+	int_defined=false;
+	float_defined=false;
+	void_defined=false;
+}
 
+Eval_Result_Return::~Eval_Result_Return() {
+	if(int_defined) delete eint;
+	if(float_defined) delete efloat;
+	if(void_defined) delete evoid;
+}
+
+bool Eval_Result_Return::is_variable_defined() {
+	return (int_defined||float_defined||void_defined);
+}
+
+void Eval_Result_Return::set_Eval_Int(Eval_Result_Value_Int * e) {
+	int_defined=true;
+	eint=e;
+}
+
+void Eval_Result_Return::set_Eval_Float(Eval_Result_Value_Float * e) {
+	float_defined=true;
+	efloat=e;
+}
+
+void Eval_Result_Return::set_Eval_Void(Eval_Result_Value_Void * e) {
+	void_defined=true;
+	evoid=e;
+}
+
+Eval_Result & Eval_Result_Return::get_Eval_Result() {
+	if(int_defined) return *eint;
+	else if(float_defined) return *efloat;
+	else if(void_defined) return *evoid;
+}
+
+void Eval_Result_Return::set_variable_status(bool def) {
+	defined=def;
+}
+
+void Eval_Result_Return::set_result_enum(Result_Enum res) {
+	result_type=res;
+}
+
+Result_Enum Eval_Result_Return::get_result_enum() {
+	return result_type;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 int Eval_Result_BB::get_value() {
     return current_block;
 }
@@ -77,7 +124,26 @@ Result_Enum Eval_Result_BB::get_result_enum() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+Eval_Result_Value_Void::Eval_Result_Value_Void(){}
+Eval_Result_Value_Void::~Eval_Result_Value_Void(){}
 
+void Eval_Result_Value_Void::set_variable_status(bool def) {
+	defined=def;
+}
+
+bool Eval_Result_Value_Void::is_variable_defined() {
+	return def;
+}
+
+void Eval_Result_Value_Void::set_result_enum(Result_Enum res) {
+	result_type=res;
+}
+
+Result_Enum Eval_Result_Value_Void::get_result_enum() {
+	return result_type;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 Eval_Result_Value_Int::Eval_Result_Value_Int()
 {
 	value = 0;

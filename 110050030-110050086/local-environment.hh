@@ -36,7 +36,8 @@ typedef enum
 	int_result,
     float_result,
 	void_result,
-    goto_result
+    goto_result,
+    return_result
 } Result_Enum;
 
 class Eval_Result;
@@ -87,6 +88,25 @@ public:
 	virtual Result_Enum get_result_enum() = 0;
 };
 
+class Eval_Result_Value_Void:public Eval_Result_Value
+{
+	bool defined;
+public:
+	Eval_Result_Value_Void();
+	~Eval_Result_Value_Void();
+
+	void set_value(int number){}
+	int get_value(){return 1;}
+    void set_floatvalue(float number){}
+	float get_floatvalue(){return 1.1;}
+
+	void set_variable_status(bool def);
+	bool is_variable_defined();
+
+	void set_result_enum(Result_Enum res);
+	Result_Enum get_result_enum();
+};
+
 class Eval_Result_Value_Int:public Eval_Result_Value
 {
 	int value;
@@ -126,6 +146,31 @@ public:
 	void set_result_enum(Result_Enum res);
 	Result_Enum get_result_enum();
 };
+
+class Eval_Result_Return:public Eval_Result
+{
+    Eval_Result_Value_Int * eint;
+    Eval_Result_Value_Float * efloat;
+    Eval_Result_Value_Void * evoid;
+    bool int_defined,float_defined,void_defined; 
+public:
+    Eval_Result_Return();
+    ~Eval_Result_Return();
+    int get_value(){}
+    void set_value(int value){}
+    void set_floatvalue(float number){}
+    float get_floatvalue(){}
+    void set_Eval_Int(Eval_Result_Value_Int * e);
+    void set_Eval_Float(Eval_Result_Value_Float * e);
+    void set_Eval_Void(Eval_Result_Value_Void * e);
+	Eval_Result & get_Eval_Result();
+    bool is_variable_defined();
+    void set_variable_status(bool def);
+
+    void set_result_enum(Result_Enum res);
+    Result_Enum get_result_enum();
+};
+
 
 class Local_Environment
 {
