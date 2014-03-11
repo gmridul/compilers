@@ -34,7 +34,8 @@ enum arithop {PLUS,MINUS,MULT,DIV};
 enum typecast_type {VOID,INTEGER,FLOAT, DOUBLE};
 
 class Ast;
-class Procedure;
+class Basic_Block;
+#include "procedure.hh"
 
 class Ast
 {
