@@ -60,6 +60,7 @@ public:
 	void push_symbol(Symbol_Table_Entry * variable);
 
 	bool variable_in_symbol_list_check(string variable);
+    bool is_empty();
 	Symbol_Table_Entry & get_symbol_table_entry(string variable_name);
 	void global_list_in_proc_map_check(int line);
 
