@@ -58,8 +58,9 @@ int main(int argc, char * argv[])
 		delete &result;
 	}
 
-	if (command_options.is_show_ast_selected())
+	if (command_options.is_show_ast_selected()) {
 		program_object.print_ast();
+	}
 
 	program_object.delete_all();
 

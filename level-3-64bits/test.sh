@@ -2,12 +2,12 @@
 cd cfg
 for f in *
 do
-echo "ksdj"
-    echo $f
-../cfglp -tokens $f
-mv $f.toks my.out
-../cfglp64 -tokens $f
-mv $f.toks sir.out
+echo $f
+../cfglp -eval $f
+mv $f.eval my.out
+../cfglp64 -eval $f
+mv $f.eval sir.out
 diff -bB my.out sir.out
     rm *out
+    echo ================================================================================== 
 done

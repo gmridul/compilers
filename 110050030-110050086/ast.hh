@@ -106,6 +106,7 @@ class Function_Call_Ast:public Ast
 
     Function_Call_Ast(list<Ast *> plist, Procedure* proc);
     ~Function_Call_Ast();
+    Data_Type get_data_type();
     void print_ast(ostream & file_buffer);
     Eval_Result & evaluate(Local_Environment & eval_env, ostream & file_buffer);
 };
@@ -213,6 +214,7 @@ class Return_Ast:public Ast
         Return_Ast();
         ~Return_Ast();
 
+        Data_Type get_data_type();
         void print_ast(ostream & file_buffer);
 
         Eval_Result & evaluate(Local_Environment & eval_env, ostream & file_buffer);

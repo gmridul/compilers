@@ -23,7 +23,7 @@
 %scanner-token-function d_scanner.lex()
 %filenames parser
 %parsefun-source parser.cc
-
+//%debug
 %union 
 {
 	int integer_value;
@@ -80,13 +80,15 @@ program:
 	func_decl_statement_list procedure_list
 	{
 		// #if 0
-		
+		std::cout<<"I am here1\n";
 		// #endif
 	}
 |
-	declaration_statement_list func_decl_statement_list procedure_list
+	
+	declaration_statement_list func_decl_statement_list 
 	{
 		// #if 0
+		std::cout<<"I am here2\n";
 		program_object.set_global_table(*$1);
 		if (!$1)
 			report_internal_error("parsing wrong");
@@ -96,13 +98,7 @@ program:
 		delete $1 ;
 		// #endif
 	}
-|
 	procedure_list
-	{
-		// #if 0
-		
-		// #endif
-	}
 ;
 	
 procedure_list:
@@ -132,6 +128,8 @@ procedure_name:
 			
 		// error checking for existence
 				current_procedure = program_object.get_procedure(*$1);
+				//current_procedure->check_parameter_list(*$3);
+				current_procedure->push_parameter_list();
 		
 		// #endif
 	}
@@ -142,6 +140,7 @@ procedure_body:
 	{
 		// #if 0
 		current_procedure->set_local_list(*$2);
+		
 		delete $2;
 		// #endif
 	}
@@ -157,6 +156,7 @@ procedure_body:
 	'{' basic_block_list '}'
 		{
 		// #if 0
+		//current_procedure->push_parameter_list();
 		current_procedure->set_basic_block_list(*$2);
 
 		delete $2;
@@ -171,7 +171,8 @@ declaration_statement_list:
 		int line = get_line_number();
 		if (!$1)
 			report_error("declaration_statement cannot be null", line);
-
+		
+		
 		program_object.variable_in_proc_map_check($1->get_variable_name(), line);
 
 		string var_name = $1->get_variable_name();
@@ -192,7 +193,7 @@ declaration_statement_list:
 		int line = get_line_number();
 		if (!$2)
 			report_error("declaration statement list cannot be null", line);
-
+		
 		program_object.variable_in_proc_map_check($2->get_variable_name(), line);
 
 		string var_name = $2->get_variable_name();
@@ -229,6 +230,7 @@ function_declaration:
 	INTEGER NAME '(' parameter_statement_list ')' ';'
 	{
 		// #if 0
+		
 		Procedure *temp = new Procedure (int_data_type,*$2,*$4);
 		program_object.set_procedure_map(*temp);
 		
@@ -247,6 +249,7 @@ function_declaration:
 	VOID NAME '(' parameter_statement_list ')' ';'
 	{
 		// #if 0
+       
 		Procedure *temp = new Procedure (void_data_type,*$2,*$4);
 		program_object.set_procedure_map(*temp);
 		
@@ -281,6 +284,7 @@ parameter_statement:
 	INTEGER NAME
 	{
 		// #if 0
+		
 		$$ = new Symbol_Table_Entry(*$2,int_data_type);
 		
 		// #endif
@@ -309,7 +313,7 @@ declaration_statement:
 		 // #if 0
 		if(!$2)
 			report_error("variable name cannot be null", get_line_number());
-
+		
 		$$ = new Symbol_Table_Entry(*$2, int_data_type);
 		delete $2;
 		// #endif
@@ -695,7 +699,7 @@ assignment_statement:
 			report_error("lhs/rhs cannot be null", get_line_number());
 
 		$$ = new Assignment_Ast($1, $3);
-		//std::cout<<$1 <<":\t:"<<$3<<std::endl;
+		
 
 		int line = get_line_number();
 		$$->check_ast(line);
@@ -718,7 +722,7 @@ variable1:
 		Symbol_Table_Entry var_table_entry;
 		if(!$1)
 			report_error("variable name cannot be null", get_line_number());
-
+			
 		if (current_procedure->variable_in_symbol_list_check(*$1))
 			 var_table_entry = current_procedure->get_symbol_table_entry(*$1);
 

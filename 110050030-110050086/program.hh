@@ -37,11 +37,11 @@ class Program;
 extern Program program_object;
 
 class Program
-{
+{public:
 	Symbol_Table global_symbol_table;
 	map<string, Procedure *> procedure_map;
 
-public:
+
 	Program();
 	~Program();
 	void delete_all();

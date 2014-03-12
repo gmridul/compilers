@@ -135,12 +135,17 @@ Function_Call_Ast::~Function_Call_Ast() {
     delete p;    
 }
 
+Data_Type Function_Call_Ast::get_data_type() {
+    return p->return_type;
+}
+
 void Function_Call_Ast::print_ast(ostream & file_buffer) {
-    file_buffer<<"FN CALL: "<<p->get_proc_name()<<"(";
+    file_buffer<<AST_NODE_SPACE<<"FN CALL: "<<p->get_proc_name()<<"(";
     for(list<Ast *>::iterator it=parameter_list.begin();it!=parameter_list.end();it++) {
+		file_buffer<<"\n"<<AST_NODE_SPACE;
         (*it)->print_ast(file_buffer);
     }
-    file_buffer<<")";
+    file_buffer<<")\n";
 }
 
 Eval_Result & Function_Call_Ast::evaluate(Local_Environment & eval_env, ostream & file_buffer) {
@@ -519,10 +524,19 @@ Return_Ast::~Return_Ast() {
     delete rhs;
 }
 
+Data_Type Return_Ast::get_data_type() {
+    if(rhs) 
+    rhs->get_data_type();
+    else {
+        cout << "return_ast get_data_type pain\n";
+    }
+}
+
 void Return_Ast::print_ast(ostream & file_buffer)
 {
     file_buffer << AST_SPACE;
-    if(rhs==NULL) file_buffer<< "Return <NOTHING>\n";
+    file_buffer<< "RETURN ";
+    if(rhs==NULL) file_buffer<< "<NOTHING>\n\n";
     else rhs->print_ast(file_buffer);
 }
 

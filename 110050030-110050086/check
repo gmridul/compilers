@@ -2,15 +2,15 @@
 Production Rules
 (rule precedences determined from %prec or 1st terminal between parentheses):
 1: program ->  func_decl_statement_list procedure_list
-2: program ->  declaration_statement_list func_decl_statement_list procedure_list
-3: program ->  procedure_list
+2: program ->  declaration_statement_list #0001 func_decl_statement_list procedure_list
+3: #0001 ->  <empty>
 4: procedure_list ->  procedure_list procedure_fun
 5: procedure_list ->  procedure_fun
-6: procedure_fun ->  procedure_name #0001 procedure_body
-7: #0001 ->  <empty>
+6: procedure_fun ->  procedure_name #0002 procedure_body
+7: #0002 ->  <empty>
 8: procedure_name (NAME) ->  NAME '(' parameter_statement_list ')'
-9: procedure_body ('{') ->  '{' declaration_statement_list #0002 basic_block_list '}'
-10: #0002 ->  <empty>
+9: procedure_body ('{') ->  '{' declaration_statement_list #0003 basic_block_list '}'
+10: #0003 ->  <empty>
 11: procedure_body ('{') ->  '{' basic_block_list '}'
 12: declaration_statement_list ->  declaration_statement
 13: declaration_statement_list ->  declaration_statement_list declaration_statement
@@ -117,15 +117,11 @@ State 0:
   0:   On program to state 1
   1:   On func_decl_statement_list to state 2
   2:   On declaration_statement_list to state 3
-  3:   On procedure_list to state 4
-  4:   On function_declaration to state 5
-  5:   On declaration_statement to state 6
-  6:   On procedure_fun to state 7
-  7:   On INTEGER to state 8
-  8:   On FLOAT to state 9
-  9:   On VOID to state 10
-  10:   On procedure_name to state 11
-  11:   On NAME to state 12
+  3:   On function_declaration to state 4
+  4:   On declaration_statement to state 5
+  5:   On INTEGER to state 6
+  6:   On FLOAT to state 7
+  7:   On VOID to state 8
 
 
 State 1:
@@ -135,377 +131,376 @@ State 1:
 State 2:
 1: program -> func_decl_statement_list  . procedure_list 
 14: func_decl_statement_list -> func_decl_statement_list  . function_declaration 
-  0:   On procedure_list to state 13
-  1:   On function_declaration to state 14
-  2:   On procedure_fun to state 7
-  3:   On INTEGER to state 15
-  4:   On FLOAT to state 16
-  5:   On VOID to state 10
-  6:   On procedure_name to state 11
-  7:   On NAME to state 12
+  0:   On procedure_list to state 9
+  1:   On function_declaration to state 10
+  2:   On procedure_fun to state 11
+  3:   On INTEGER to state 12
+  4:   On FLOAT to state 13
+  5:   On VOID to state 8
+  6:   On procedure_name to state 14
+  7:   On NAME to state 15
 
 
 State 3:
-2: program -> declaration_statement_list  . func_decl_statement_list procedure_list 
+2: program -> declaration_statement_list  . #0001 func_decl_statement_list procedure_list 
 13: declaration_statement_list -> declaration_statement_list  . declaration_statement 
-  0:   On func_decl_statement_list to state 17
-  1:   On declaration_statement to state 18
-  2:   On function_declaration to state 5
-  3:   On INTEGER to state 8
-  4:   On FLOAT to state 9
-  5:   On VOID to state 10
+  0:   On #0001 to state 16
+  1:   On declaration_statement to state 17
+  2 (AUTO REMOVED by S/R resolution):   On INTEGER to state 18
+  3 (AUTO REMOVED by S/R resolution):   On FLOAT to state 19
+  Reduce by 3: #0001 ->  . 
 
 
 State 4:
-3: program -> procedure_list  . 
-4: procedure_list -> procedure_list  . procedure_fun 
-  0:   On procedure_fun to state 19
-  1:   On procedure_name to state 11
-  2:   On NAME to state 12
-  Reduce by 3: program -> procedure_list  . 
-
-
-State 5:
 15: func_decl_statement_list -> function_declaration  . 
   Reduce by 15: func_decl_statement_list -> function_declaration  . 
 
 
-State 6:
+State 5:
 12: declaration_statement_list -> declaration_statement  . 
   Reduce by 12: declaration_statement_list -> declaration_statement  . 
 
 
-State 7:
-5: procedure_list -> procedure_fun  . 
-  Reduce by 5: procedure_list -> procedure_fun  . 
-
-
-State 8:
+State 6:
 16: function_declaration -> INTEGER  . NAME '(' parameter_statement_list ')' ';' 
 24: declaration_statement -> INTEGER  . NAME ';' 
   0:   On NAME to state 20
 
 
-State 9:
+State 7:
 17: function_declaration -> FLOAT  . NAME '(' parameter_statement_list ')' ';' 
 25: declaration_statement -> FLOAT  . NAME ';' 
   0:   On NAME to state 21
 
 
-State 10:
+State 8:
 18: function_declaration -> VOID  . NAME '(' parameter_statement_list ')' ';' 
   0:   On NAME to state 22
 
 
-State 11:
-6: procedure_fun -> procedure_name  . #0001 procedure_body 
-  0:   On #0001 to state 23
-  Reduce by 7: #0001 ->  . 
-
-
-State 12:
-8: procedure_name -> NAME  . '(' parameter_statement_list ')' 
-  0:   On '(' to state 24
-
-
-State 13:
+State 9:
 1: program -> func_decl_statement_list procedure_list  . 
 4: procedure_list -> procedure_list  . procedure_fun 
-  0:   On procedure_fun to state 19
-  1:   On procedure_name to state 11
-  2:   On NAME to state 12
+  0:   On procedure_fun to state 23
+  1:   On procedure_name to state 14
+  2:   On NAME to state 15
   Reduce by 1: program -> func_decl_statement_list procedure_list  . 
 
 
-State 14:
+State 10:
 14: func_decl_statement_list -> func_decl_statement_list function_declaration  . 
   Reduce by 14: func_decl_statement_list -> func_decl_statement_list function_declaration  . 
 
 
-State 15:
+State 11:
+5: procedure_list -> procedure_fun  . 
+  Reduce by 5: procedure_list -> procedure_fun  . 
+
+
+State 12:
 16: function_declaration -> INTEGER  . NAME '(' parameter_statement_list ')' ';' 
+  0:   On NAME to state 24
+
+
+State 13:
+17: function_declaration -> FLOAT  . NAME '(' parameter_statement_list ')' ';' 
   0:   On NAME to state 25
 
 
+State 14:
+6: procedure_fun -> procedure_name  . #0002 procedure_body 
+  0:   On #0002 to state 26
+  Reduce by 7: #0002 ->  . 
+
+
+State 15:
+8: procedure_name -> NAME  . '(' parameter_statement_list ')' 
+  0:   On '(' to state 27
+
+
 State 16:
-17: function_declaration -> FLOAT  . NAME '(' parameter_statement_list ')' ';' 
-  0:   On NAME to state 26
+2: program -> declaration_statement_list #0001  . func_decl_statement_list procedure_list 
+  0:   On func_decl_statement_list to state 28
+  1:   On function_declaration to state 4
+  2:   On INTEGER to state 12
+  3:   On FLOAT to state 13
+  4:   On VOID to state 8
 
 
 State 17:
-2: program -> declaration_statement_list func_decl_statement_list  . procedure_list 
-14: func_decl_statement_list -> func_decl_statement_list  . function_declaration 
-  0:   On procedure_list to state 27
-  1:   On function_declaration to state 14
-  2:   On procedure_fun to state 7
-  3:   On INTEGER to state 15
-  4:   On FLOAT to state 16
-  5:   On VOID to state 10
-  6:   On procedure_name to state 11
-  7:   On NAME to state 12
-
-
-State 18:
 13: declaration_statement_list -> declaration_statement_list declaration_statement  . 
   Reduce by 13: declaration_statement_list -> declaration_statement_list declaration_statement  . 
 
 
+State 18:
+24: declaration_statement -> INTEGER  . NAME ';' 
+  0:   On NAME to state 29
+
+
 State 19:
-4: procedure_list -> procedure_list procedure_fun  . 
-  Reduce by 4: procedure_list -> procedure_list procedure_fun  . 
+25: declaration_statement -> FLOAT  . NAME ';' 
+  0:   On NAME to state 30
 
 
 State 20:
 16: function_declaration -> INTEGER NAME  . '(' parameter_statement_list ')' ';' 
 24: declaration_statement -> INTEGER NAME  . ';' 
-  0:   On '(' to state 28
-  1:   On ';' to state 29
+  0:   On '(' to state 31
+  1:   On ';' to state 32
 
 
 State 21:
 17: function_declaration -> FLOAT NAME  . '(' parameter_statement_list ')' ';' 
 25: declaration_statement -> FLOAT NAME  . ';' 
-  0:   On '(' to state 30
-  1:   On ';' to state 31
+  0:   On '(' to state 33
+  1:   On ';' to state 34
 
 
 State 22:
 18: function_declaration -> VOID NAME  . '(' parameter_statement_list ')' ';' 
-  0:   On '(' to state 32
+  0:   On '(' to state 35
 
 
 State 23:
-6: procedure_fun -> procedure_name #0001  . procedure_body 
-  0:   On procedure_body to state 33
-  1:   On '{' to state 34
+4: procedure_list -> procedure_list procedure_fun  . 
+  Reduce by 4: procedure_list -> procedure_list procedure_fun  . 
 
 
 State 24:
-8: procedure_name -> NAME '('  . parameter_statement_list ')' 
-  0:   On parameter_statement_list to state 35
-  1:   On parameter_statement to state 36
-  2:   On INTEGER to state 37
-  3:   On FLOAT to state 38
-  Reduce by 23: parameter_statement ->  . 
+16: function_declaration -> INTEGER NAME  . '(' parameter_statement_list ')' ';' 
+  0:   On '(' to state 31
 
 
 State 25:
-16: function_declaration -> INTEGER NAME  . '(' parameter_statement_list ')' ';' 
-  0:   On '(' to state 28
+17: function_declaration -> FLOAT NAME  . '(' parameter_statement_list ')' ';' 
+  0:   On '(' to state 33
 
 
 State 26:
-17: function_declaration -> FLOAT NAME  . '(' parameter_statement_list ')' ';' 
-  0:   On '(' to state 30
+6: procedure_fun -> procedure_name #0002  . procedure_body 
+  0:   On procedure_body to state 36
+  1:   On '{' to state 37
 
 
 State 27:
-2: program -> declaration_statement_list func_decl_statement_list procedure_list  . 
-4: procedure_list -> procedure_list  . procedure_fun 
-  0:   On procedure_fun to state 19
-  1:   On procedure_name to state 11
-  2:   On NAME to state 12
-  Reduce by 2: program -> declaration_statement_list func_decl_statement_list procedure_list  . 
-
-
-State 28:
-16: function_declaration -> INTEGER NAME '('  . parameter_statement_list ')' ';' 
-  0:   On parameter_statement_list to state 39
-  1:   On parameter_statement to state 36
-  2:   On INTEGER to state 37
-  3:   On FLOAT to state 38
+8: procedure_name -> NAME '('  . parameter_statement_list ')' 
+  0:   On parameter_statement_list to state 38
+  1:   On parameter_statement to state 39
+  2:   On INTEGER to state 40
+  3:   On FLOAT to state 41
   Reduce by 23: parameter_statement ->  . 
 
 
+State 28:
+2: program -> declaration_statement_list #0001 func_decl_statement_list  . procedure_list 
+14: func_decl_statement_list -> func_decl_statement_list  . function_declaration 
+  0:   On procedure_list to state 42
+  1:   On function_declaration to state 10
+  2:   On procedure_fun to state 11
+  3:   On INTEGER to state 12
+  4:   On FLOAT to state 13
+  5:   On VOID to state 8
+  6:   On procedure_name to state 14
+  7:   On NAME to state 15
+
+
 State 29:
+24: declaration_statement -> INTEGER NAME  . ';' 
+  0:   On ';' to state 32
+
+
+State 30:
+25: declaration_statement -> FLOAT NAME  . ';' 
+  0:   On ';' to state 34
+
+
+State 31:
+16: function_declaration -> INTEGER NAME '('  . parameter_statement_list ')' ';' 
+  0:   On parameter_statement_list to state 43
+  1:   On parameter_statement to state 39
+  2:   On INTEGER to state 40
+  3:   On FLOAT to state 41
+  Reduce by 23: parameter_statement ->  . 
+
+
+State 32:
 24: declaration_statement -> INTEGER NAME ';'  . 
   Reduce by 24: declaration_statement -> INTEGER NAME ';'  . 
 
 
-State 30:
+State 33:
 17: function_declaration -> FLOAT NAME '('  . parameter_statement_list ')' ';' 
-  0:   On parameter_statement_list to state 40
-  1:   On parameter_statement to state 36
-  2:   On INTEGER to state 37
-  3:   On FLOAT to state 38
+  0:   On parameter_statement_list to state 44
+  1:   On parameter_statement to state 39
+  2:   On INTEGER to state 40
+  3:   On FLOAT to state 41
   Reduce by 23: parameter_statement ->  . 
 
 
-State 31:
+State 34:
 25: declaration_statement -> FLOAT NAME ';'  . 
   Reduce by 25: declaration_statement -> FLOAT NAME ';'  . 
 
 
-State 32:
+State 35:
 18: function_declaration -> VOID NAME '('  . parameter_statement_list ')' ';' 
-  0:   On parameter_statement_list to state 41
-  1:   On parameter_statement to state 36
-  2:   On INTEGER to state 37
-  3:   On FLOAT to state 38
+  0:   On parameter_statement_list to state 45
+  1:   On parameter_statement to state 39
+  2:   On INTEGER to state 40
+  3:   On FLOAT to state 41
   Reduce by 23: parameter_statement ->  . 
 
 
-State 33:
-6: procedure_fun -> procedure_name #0001 procedure_body  . 
-  Reduce by 6: procedure_fun -> procedure_name #0001 procedure_body  . 
+State 36:
+6: procedure_fun -> procedure_name #0002 procedure_body  . 
+  Reduce by 6: procedure_fun -> procedure_name #0002 procedure_body  . 
 
 
-State 34:
-9: procedure_body -> '{'  . declaration_statement_list #0002 basic_block_list '}' 
+State 37:
+9: procedure_body -> '{'  . declaration_statement_list #0003 basic_block_list '}' 
 11: procedure_body -> '{'  . basic_block_list '}' 
-  0:   On declaration_statement_list to state 42
-  1:   On basic_block_list to state 43
-  2:   On declaration_statement to state 6
-  3:   On basic_block to state 44
-  4:   On INTEGER to state 45
-  5:   On FLOAT to state 46
-  6:   On BASIC_BLOCK to state 47
+  0:   On declaration_statement_list to state 46
+  1:   On basic_block_list to state 47
+  2:   On declaration_statement to state 5
+  3:   On basic_block to state 48
+  4:   On INTEGER to state 18
+  5:   On FLOAT to state 19
+  6:   On BASIC_BLOCK to state 49
 
 
-State 35:
+State 38:
 8: procedure_name -> NAME '(' parameter_statement_list  . ')' 
 20: parameter_statement_list -> parameter_statement_list  . ',' parameter_statement 
-  0:   On ')' to state 48
-  1:   On ',' to state 49
+  0:   On ')' to state 50
+  1:   On ',' to state 51
 
 
-State 36:
+State 39:
 19: parameter_statement_list -> parameter_statement  . 
   Reduce by 19: parameter_statement_list -> parameter_statement  . 
 
 
-State 37:
-21: parameter_statement -> INTEGER  . NAME 
-  0:   On NAME to state 50
-
-
-State 38:
-22: parameter_statement -> FLOAT  . NAME 
-  0:   On NAME to state 51
-
-
-State 39:
-16: function_declaration -> INTEGER NAME '(' parameter_statement_list  . ')' ';' 
-20: parameter_statement_list -> parameter_statement_list  . ',' parameter_statement 
-  0:   On ')' to state 52
-  1:   On ',' to state 49
-
-
 State 40:
-17: function_declaration -> FLOAT NAME '(' parameter_statement_list  . ')' ';' 
-20: parameter_statement_list -> parameter_statement_list  . ',' parameter_statement 
-  0:   On ')' to state 53
-  1:   On ',' to state 49
+21: parameter_statement -> INTEGER  . NAME 
+  0:   On NAME to state 52
 
 
 State 41:
-18: function_declaration -> VOID NAME '(' parameter_statement_list  . ')' ';' 
-20: parameter_statement_list -> parameter_statement_list  . ',' parameter_statement 
-  0:   On ')' to state 54
-  1:   On ',' to state 49
+22: parameter_statement -> FLOAT  . NAME 
+  0:   On NAME to state 53
 
 
 State 42:
-9: procedure_body -> '{' declaration_statement_list  . #0002 basic_block_list '}' 
-13: declaration_statement_list -> declaration_statement_list  . declaration_statement 
-  0:   On #0002 to state 55
-  1:   On declaration_statement to state 18
-  2:   On INTEGER to state 45
-  3:   On FLOAT to state 46
-  Reduce by 10: #0002 ->  . 
+2: program -> declaration_statement_list #0001 func_decl_statement_list procedure_list  . 
+4: procedure_list -> procedure_list  . procedure_fun 
+  0:   On procedure_fun to state 23
+  1:   On procedure_name to state 14
+  2:   On NAME to state 15
+  Reduce by 2: program -> declaration_statement_list #0001 func_decl_statement_list procedure_list  . 
 
 
 State 43:
-11: procedure_body -> '{' basic_block_list  . '}' 
-26: basic_block_list -> basic_block_list  . basic_block 
-  0:   On '}' to state 56
-  1:   On basic_block to state 57
-  2:   On BASIC_BLOCK to state 47
+16: function_declaration -> INTEGER NAME '(' parameter_statement_list  . ')' ';' 
+20: parameter_statement_list -> parameter_statement_list  . ',' parameter_statement 
+  0:   On ')' to state 54
+  1:   On ',' to state 51
 
 
 State 44:
+17: function_declaration -> FLOAT NAME '(' parameter_statement_list  . ')' ';' 
+20: parameter_statement_list -> parameter_statement_list  . ',' parameter_statement 
+  0:   On ')' to state 55
+  1:   On ',' to state 51
+
+
+State 45:
+18: function_declaration -> VOID NAME '(' parameter_statement_list  . ')' ';' 
+20: parameter_statement_list -> parameter_statement_list  . ',' parameter_statement 
+  0:   On ')' to state 56
+  1:   On ',' to state 51
+
+
+State 46:
+9: procedure_body -> '{' declaration_statement_list  . #0003 basic_block_list '}' 
+13: declaration_statement_list -> declaration_statement_list  . declaration_statement 
+  0:   On #0003 to state 57
+  1:   On declaration_statement to state 17
+  2:   On INTEGER to state 18
+  3:   On FLOAT to state 19
+  Reduce by 10: #0003 ->  . 
+
+
+State 47:
+11: procedure_body -> '{' basic_block_list  . '}' 
+26: basic_block_list -> basic_block_list  . basic_block 
+  0:   On '}' to state 58
+  1:   On basic_block to state 59
+  2:   On BASIC_BLOCK to state 49
+
+
+State 48:
 27: basic_block_list -> basic_block  . 
   Reduce by 27: basic_block_list -> basic_block  . 
 
 
-State 45:
-24: declaration_statement -> INTEGER  . NAME ';' 
-  0:   On NAME to state 58
-
-
-State 46:
-25: declaration_statement -> FLOAT  . NAME ';' 
-  0:   On NAME to state 59
-
-
-State 47:
+State 49:
 28: basic_block -> BASIC_BLOCK  . ':' executable_statement_list 
   0:   On ':' to state 60
 
 
-State 48:
+State 50:
 8: procedure_name -> NAME '(' parameter_statement_list ')'  . 
   Reduce by 8: procedure_name -> NAME '(' parameter_statement_list ')'  . 
 
 
-State 49:
+State 51:
 20: parameter_statement_list -> parameter_statement_list ','  . parameter_statement 
   0:   On parameter_statement to state 61
-  1:   On INTEGER to state 37
-  2:   On FLOAT to state 38
+  1:   On INTEGER to state 40
+  2:   On FLOAT to state 41
   Reduce by 23: parameter_statement ->  . 
 
 
-State 50:
+State 52:
 21: parameter_statement -> INTEGER NAME  . 
   Reduce by 21: parameter_statement -> INTEGER NAME  . 
 
 
-State 51:
+State 53:
 22: parameter_statement -> FLOAT NAME  . 
   Reduce by 22: parameter_statement -> FLOAT NAME  . 
 
 
-State 52:
+State 54:
 16: function_declaration -> INTEGER NAME '(' parameter_statement_list ')'  . ';' 
   0:   On ';' to state 62
 
 
-State 53:
+State 55:
 17: function_declaration -> FLOAT NAME '(' parameter_statement_list ')'  . ';' 
   0:   On ';' to state 63
 
 
-State 54:
+State 56:
 18: function_declaration -> VOID NAME '(' parameter_statement_list ')'  . ';' 
   0:   On ';' to state 64
 
 
-State 55:
-9: procedure_body -> '{' declaration_statement_list #0002  . basic_block_list '}' 
+State 57:
+9: procedure_body -> '{' declaration_statement_list #0003  . basic_block_list '}' 
   0:   On basic_block_list to state 65
-  1:   On basic_block to state 44
-  2:   On BASIC_BLOCK to state 47
+  1:   On basic_block to state 48
+  2:   On BASIC_BLOCK to state 49
 
 
-State 56:
+State 58:
 11: procedure_body -> '{' basic_block_list '}'  . 
   Reduce by 11: procedure_body -> '{' basic_block_list '}'  . 
 
 
-State 57:
+State 59:
 26: basic_block_list -> basic_block_list basic_block  . 
   Reduce by 26: basic_block_list -> basic_block_list basic_block  . 
-
-
-State 58:
-24: declaration_statement -> INTEGER NAME  . ';' 
-  0:   On ';' to state 29
-
-
-State 59:
-25: declaration_statement -> FLOAT NAME  . ';' 
-  0:   On ';' to state 31
 
 
 State 60:
@@ -536,11 +531,11 @@ State 64:
 
 
 State 65:
-9: procedure_body -> '{' declaration_statement_list #0002 basic_block_list  . '}' 
+9: procedure_body -> '{' declaration_statement_list #0003 basic_block_list  . '}' 
 26: basic_block_list -> basic_block_list  . basic_block 
   0:   On '}' to state 68
-  1:   On basic_block to state 57
-  2:   On BASIC_BLOCK to state 47
+  1:   On basic_block to state 59
+  2:   On BASIC_BLOCK to state 49
 
 
 State 66:
@@ -567,8 +562,8 @@ State 67:
 
 
 State 68:
-9: procedure_body -> '{' declaration_statement_list #0002 basic_block_list '}'  . 
-  Reduce by 9: procedure_body -> '{' declaration_statement_list #0002 basic_block_list '}'  . 
+9: procedure_body -> '{' declaration_statement_list #0003 basic_block_list '}'  . 
+  Reduce by 9: procedure_body -> '{' declaration_statement_list #0003 basic_block_list '}'  . 
 
 
 State 69:

@@ -48,9 +48,10 @@ typedef enum
 
 class Symbol_Table
 {
+	public:
 	list<Symbol_Table_Entry *> variable_table;
 	Table_Scope scope;
-public:
+
 	Symbol_Table();
 	~Symbol_Table();
 
@@ -69,10 +70,10 @@ public:
 
 class Symbol_Table_Entry
 {
+public:
 	string variable_name;
 	Data_Type variable_data_type;
 
-public:
 	Symbol_Table_Entry();
 	Symbol_Table_Entry(string & name, Data_Type new_data_type);
 	~Symbol_Table_Entry();

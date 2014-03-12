@@ -40,13 +40,14 @@ class Procedure;
 
 class Procedure
 {
+	public:
 	Data_Type return_type;
 	string name;
 	Symbol_Table local_symbol_table;
 	list<Basic_Block *> basic_block_list;
     Local_Environment * eval_env;
     list<Symbol_Table_Entry * > parameter_list;
-    public:
+    
 	Procedure(Data_Type proc_return_type, string proc_name, list<Symbol_Table_Entry * > plist);
 	~Procedure();
 
@@ -58,7 +59,8 @@ class Procedure
     Basic_Block * goto_bb(Basic_Block & current_bb, Eval_Result* result);
 	void print_ast(ostream & file_buffer);
     void put_variable_value(list<Eval_Result* > & value);
-
+	void push_parameter_list();
+	
 	Basic_Block * get_next_bb(Basic_Block & current_bb);
 	Basic_Block & get_start_basic_block();
 

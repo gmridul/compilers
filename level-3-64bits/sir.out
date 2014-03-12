@@ -1,11 +1,11 @@
 Program:
-   Procedure: fn
+   Procedure: fn2
 
       Basic_Block 2
          Asgn:
-            LHS (Name : c)
-            RHS (Num : 4)
-         RETURN <NOTHING>
+            LHS (Name : b)
+            RHS (Num : 2)
+         RETURN Name : b
 
    Procedure: main
 
@@ -14,8 +14,10 @@ Program:
             LHS (Name : a)
             RHS (Num : 3)
          Asgn:
-            LHS (Name : b)
-            RHS (Num : 5)
-         FN CALL: fn()
+            LHS (Name : a)
+            RHS (
+         FN CALL: fn2(
+            Name : a
+            Name : a))
          RETURN <NOTHING>
 

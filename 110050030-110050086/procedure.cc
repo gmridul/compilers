@@ -63,14 +63,36 @@ void Procedure::set_basic_block_list(list<Basic_Block *> bb_list)
 
 void Procedure::set_local_list(Symbol_Table & new_list)
 {
-	local_symbol_table = new_list;
-	local_symbol_table.set_table_scope(local);
-    //list<Symbol_Table_Entry * > parameter_list;
-    list<Symbol_Table_Entry * >::iterator it=parameter_list.begin();
-    for(;it!=parameter_list.end();it++) {
-        local_symbol_table.push_symbol(*it);
+	list<Symbol_Table_Entry * >  parameter_list_temp = new_list.variable_table;
+	list<Symbol_Table_Entry * >::iterator it=parameter_list_temp.begin();
+   // cout << parameter_list_temp.size() << "list size\n";
+    for(;it!=parameter_list_temp.end();it++) {
+        if((*it)) {
+     //       cout << (*it)->variable_name<<"in set_local_list\n";
+            local_symbol_table.push_symbol(*it);
+        }
     }
+    //cout << parameter_list_temp.size() << "list size\n";
+	local_symbol_table.set_table_scope(local);
+    //list<Symbol_Table_Entry * > parameter_list_temp;
+    
 }
+
+void Procedure::push_parameter_list(){
+
+local_symbol_table.set_table_scope(local);
+
+	list<Symbol_Table_Entry * >::iterator it=parameter_list.begin();
+    //cout << parameter_list.size() << "list size\n";
+    for(;it!=parameter_list.end();it++) {
+        if((*it)) {
+      //      cout << (*it)->variable_name<<"in set_local_list\n";
+            local_symbol_table.push_symbol(*it);
+        }
+    }
+    //cout << parameter_list.size() << "list size\n";
+}
+
 
 Data_Type Procedure::get_return_type()
 {
@@ -89,7 +111,7 @@ Symbol_Table_Entry & Procedure::get_symbol_table_entry(string variable_name)
 
 void Procedure::print_ast(ostream & file_buffer)
 {
-	file_buffer << PROC_SPACE << "Procedure: main" << "\n";
+	file_buffer << "\n" <<PROC_SPACE << "Procedure: "<<this->get_proc_name() << "\n\n";
 
 	list<Basic_Block *>::iterator i;
 	for(i = basic_block_list.begin(); i != basic_block_list.end(); i++)
