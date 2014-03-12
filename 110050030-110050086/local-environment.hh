@@ -149,9 +149,7 @@ public:
 
 class Eval_Result_Return:public Eval_Result
 {
-    Eval_Result_Value_Int * eint;
-    Eval_Result_Value_Float * efloat;
-    Eval_Result_Value_Void * evoid;
+    Eval_Result * e;
     bool int_defined,float_defined,void_defined; 
 public:
     Eval_Result_Return();
@@ -160,9 +158,7 @@ public:
     void set_value(int value){}
     void set_floatvalue(float number){}
     float get_floatvalue(){}
-    void set_Eval_Int(Eval_Result_Value_Int * e);
-    void set_Eval_Float(Eval_Result_Value_Float * e);
-    void set_Eval_Void(Eval_Result_Value_Void * e);
+    void set_Eval(Eval_Result * etemp, Result_Enum r);
 	Eval_Result & get_Eval_Result();
     bool is_variable_defined();
     void set_variable_status(bool def);

@@ -529,16 +529,21 @@ void Return_Ast::print_ast(ostream & file_buffer)
 Eval_Result & Return_Ast::evaluate(Local_Environment & eval_env, ostream & file_buffer)
 {
     print_ast(file_buffer);
-    Eval_Result & result = *new Eval_Result_Return(); //define this eval result
+    Eval_Result_Return & result = *new Eval_Result_Return(); //define this eval result
     
-
     if(rhs) {
 		if(rhs->get_data_type()==int_data_type) {
-			result.set(rhs->evaluate(eval_env,file_buffer));
-    else {
-        
-    result.set_result_enum(return_result);
+			result.set_Eval(&rhs->evaluate(eval_env,file_buffer),int_result);
+        }
+        else if(rhs->get_data_type()==float_data_type) {
+			result.set_Eval(&rhs->evaluate(eval_env,file_buffer),float_result);
+        }
+    }
 
+    else if(rhs->get_data_type()==void_data_type) {
+        result.set_Eval(&rhs->evaluate(eval_env,file_buffer),void_result);
+    }
+    result.set_result_enum(return_result);
 
     return result;
 }

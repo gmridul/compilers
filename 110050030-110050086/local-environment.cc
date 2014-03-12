@@ -64,39 +64,34 @@ Eval_Result_Return::Eval_Result_Return() {
 }
 
 Eval_Result_Return::~Eval_Result_Return() {
-	if(int_defined) delete eint;
-	if(float_defined) delete efloat;
-	if(void_defined) delete evoid;
+	if(int_defined||float_defined||void_defined) delete e;
 }
 
 bool Eval_Result_Return::is_variable_defined() {
 	return (int_defined||float_defined||void_defined);
 }
 
-void Eval_Result_Return::set_Eval_Int(Eval_Result_Value_Int * e) {
-	int_defined=true;
-	eint=e;
-}
+void Eval_Result_Return::set_Eval(Eval_Result * etemp, Result_Enum r) {
+    if(r==int_result) {
+        int_defined=true;
+        e=etemp;
+    }
 
-void Eval_Result_Return::set_Eval_Float(Eval_Result_Value_Float * e) {
-	float_defined=true;
-	efloat=e;
-}
-
-void Eval_Result_Return::set_Eval_Void(Eval_Result_Value_Void * e) {
-	void_defined=true;
-	evoid=e;
+    if(r==float_result) {
+        float_defined=true;
+        e=etemp;
+    }
+    if(r==void_result) {
+        void_defined=true;
+        e=etemp;
+    }
 }
 
 Eval_Result & Eval_Result_Return::get_Eval_Result() {
-	if(int_defined) return *eint;
-	else if(float_defined) return *efloat;
-	else if(void_defined) return *evoid;
+	if(int_defined||float_defined||void_defined) return *e;
 }
 
-void Eval_Result_Return::set_variable_status(bool def) {
-	defined=def;
-}
+void Eval_Result_Return::set_variable_status(bool def){} 
 
 void Eval_Result_Return::set_result_enum(Result_Enum res) {
 	result_type=res;
@@ -132,9 +127,8 @@ void Eval_Result_Value_Void::set_variable_status(bool def) {
 }
 
 bool Eval_Result_Value_Void::is_variable_defined() {
-	return def;
+    return defined;
 }
-
 void Eval_Result_Value_Void::set_result_enum(Result_Enum res) {
 	result_type=res;
 }
