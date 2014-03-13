@@ -3,10 +3,10 @@ cd cfg
 for f in *
 do
 echo $f
-../cfglp -ast $f
-mv $f.ast my.out
-../cfglp64 -ast $f
-mv $f.ast sir.out
+../cfglp -eval $f
+mv $f.eval my.out
+../cfglp64 -eval $f
+mv $f.eval sir.out
 diff -bB sir.out my.out 
     rm *out
     echo ================================================================================== 

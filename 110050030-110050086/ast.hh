@@ -208,15 +208,16 @@ class Number_Ast:public Ast
 class Return_Ast:public Ast
 {
     Ast* rhs;
-
     public:
+
+	//float main_result_float;
+    
         Return_Ast(Ast* temp);
         Return_Ast();
         ~Return_Ast();
 
         Data_Type get_data_type();
         void print_ast(ostream & file_buffer);
-
         Eval_Result & evaluate(Local_Environment & eval_env, ostream & file_buffer);
 };
 

@@ -1,0 +1,1179 @@
+ArithRelFn.cs306.cfg
+==================================================================================
+ArithRelInOutFn.cs306.cfg
+==================================================================================
+CatchFloatInInt.cs306.cfg
+==================================================================================
+CatchRet.cs306.cfg
+==================================================================================
+DTemp.cs306.cfg
+==================================================================================
+EmptyBB.cs306.cfg
+==================================================================================
+EmptyFn.cs306.cfg
+==================================================================================
+Fact.cs306.cfg
+29,290d29
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : a)
+<                RHS (Num : 1)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition False : Goto (BB 4)
+< 
+<       Basic Block: 4
+< 
+<          Asgn:
+<             LHS (Name : prod)
+<             RHS (
+<             Arith: MULT
+<                LHS (Name : prod)
+<                RHS (Name : a))
+<          prod : 10
+< 
+<    Evaluating Procedure << fact >>
+<       Local Variables (before evaluating):
+<          a : 9
+< 
+< 
+<       Basic Block: 2
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : a)
+<                RHS (Num : 1)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition False : Goto (BB 4)
+< 
+<       Basic Block: 4
+< 
+<          Asgn:
+<             LHS (Name : prod)
+<             RHS (
+<             Arith: MULT
+<                LHS (Name : prod)
+<                RHS (Name : a))
+<          prod : 90
+< 
+<    Evaluating Procedure << fact >>
+<       Local Variables (before evaluating):
+<          a : 8
+< 
+< 
+<       Basic Block: 2
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : a)
+<                RHS (Num : 1)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition False : Goto (BB 4)
+< 
+<       Basic Block: 4
+< 
+<          Asgn:
+<             LHS (Name : prod)
+<             RHS (
+<             Arith: MULT
+<                LHS (Name : prod)
+<                RHS (Name : a))
+<          prod : 720
+< 
+<    Evaluating Procedure << fact >>
+<       Local Variables (before evaluating):
+<          a : 7
+< 
+< 
+<       Basic Block: 2
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : a)
+<                RHS (Num : 1)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition False : Goto (BB 4)
+< 
+<       Basic Block: 4
+< 
+<          Asgn:
+<             LHS (Name : prod)
+<             RHS (
+<             Arith: MULT
+<                LHS (Name : prod)
+<                RHS (Name : a))
+<          prod : 5040
+< 
+<    Evaluating Procedure << fact >>
+<       Local Variables (before evaluating):
+<          a : 6
+< 
+< 
+<       Basic Block: 2
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : a)
+<                RHS (Num : 1)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition False : Goto (BB 4)
+< 
+<       Basic Block: 4
+< 
+<          Asgn:
+<             LHS (Name : prod)
+<             RHS (
+<             Arith: MULT
+<                LHS (Name : prod)
+<                RHS (Name : a))
+<          prod : 30240
+< 
+<    Evaluating Procedure << fact >>
+<       Local Variables (before evaluating):
+<          a : 5
+< 
+< 
+<       Basic Block: 2
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : a)
+<                RHS (Num : 1)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition False : Goto (BB 4)
+< 
+<       Basic Block: 4
+< 
+<          Asgn:
+<             LHS (Name : prod)
+<             RHS (
+<             Arith: MULT
+<                LHS (Name : prod)
+<                RHS (Name : a))
+<          prod : 151200
+< 
+<    Evaluating Procedure << fact >>
+<       Local Variables (before evaluating):
+<          a : 4
+< 
+< 
+<       Basic Block: 2
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : a)
+<                RHS (Num : 1)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition False : Goto (BB 4)
+< 
+<       Basic Block: 4
+< 
+<          Asgn:
+<             LHS (Name : prod)
+<             RHS (
+<             Arith: MULT
+<                LHS (Name : prod)
+<                RHS (Name : a))
+<          prod : 604800
+< 
+<    Evaluating Procedure << fact >>
+<       Local Variables (before evaluating):
+<          a : 3
+< 
+< 
+<       Basic Block: 2
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : a)
+<                RHS (Num : 1)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition False : Goto (BB 4)
+< 
+<       Basic Block: 4
+< 
+<          Asgn:
+<             LHS (Name : prod)
+<             RHS (
+<             Arith: MULT
+<                LHS (Name : prod)
+<                RHS (Name : a))
+<          prod : 1814400
+< 
+<    Evaluating Procedure << fact >>
+<       Local Variables (before evaluating):
+<          a : 2
+< 
+< 
+<       Basic Block: 2
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : a)
+<                RHS (Num : 1)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition False : Goto (BB 4)
+< 
+<       Basic Block: 4
+< 
+<          Asgn:
+<             LHS (Name : prod)
+<             RHS (
+<             Arith: MULT
+<                LHS (Name : prod)
+<                RHS (Name : a))
+<          prod : 3628800
+< 
+<    Evaluating Procedure << fact >>
+<       Local Variables (before evaluating):
+<          a : 1
+< 
+< 
+<       Basic Block: 2
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : a)
+<                RHS (Num : 1)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition True : Goto (BB 3)
+< 
+<       Basic Block: 3
+< 
+<          RETURN Num : 1
+< 
+< 
+<       Local Variables (after evaluating) Function: << fact >>
+<          a : 1
+<          return : 1
+< 
+<          RETURN <NOTHING>
+< 
+< 
+<       Local Variables (after evaluating) Function: << fact >>
+<          a : 2
+< 
+<          RETURN <NOTHING>
+< 
+< 
+<       Local Variables (after evaluating) Function: << fact >>
+<          a : 3
+< 
+<          RETURN <NOTHING>
+< 
+< 
+<       Local Variables (after evaluating) Function: << fact >>
+<          a : 4
+< 
+<          RETURN <NOTHING>
+< 
+292,331d30
+<       Local Variables (after evaluating) Function: << fact >>
+<          a : 5
+< 
+<          RETURN <NOTHING>
+< 
+< 
+<       Local Variables (after evaluating) Function: << fact >>
+<          a : 6
+< 
+<          RETURN <NOTHING>
+< 
+< 
+<       Local Variables (after evaluating) Function: << fact >>
+<          a : 7
+< 
+<          RETURN <NOTHING>
+< 
+< 
+<       Local Variables (after evaluating) Function: << fact >>
+<          a : 8
+< 
+<          RETURN <NOTHING>
+< 
+< 
+<       Local Variables (after evaluating) Function: << fact >>
+<          a : 9
+< 
+<          RETURN <NOTHING>
+< 
+< 
+<       Local Variables (after evaluating) Function: << fact >>
+<          a : 10
+< 
+<          RETURN <NOTHING>
+< 
+< 
+<       Local Variables (after evaluating) Function: << main >>
+<          a : 10
+<    Global Variables (after evaluating):
+<          prod : 3628800
+==================================================================================
+FloatUnary.cs306.cfg
+==================================================================================
+fn_call_return.cs306.cfg
+==================================================================================
+FnPrtyp.cs306.cfg
+==================================================================================
+fun_arg_arth_rel.cs306.cfg
+57,69c58
+<          If_Else statement:
+<             Condition: NE
+<                LHS (
+<             Condition: GE
+<                LHS (
+<          FN CALL: add(
+<             
+<             Arith: PLUS
+<                LHS (Name : a)
+<                RHS (Name : b)
+<             Name : iftmp0))
+<                RHS (Name : c))
+<                RHS (Num : 0)   Evaluating Procedure << add >>
+---
+>    Evaluating Procedure << add >>
+87a79,91
+>          If_Else statement:            
+>          Condition: NE
+>             LHS (
+>          Condition: GE
+>             LHS (
+>             FN CALL: add(
+>             
+>          Arith: PLUS
+>             LHS (Name : a)
+>             RHS (Name : b)
+>             Name : iftmp0))
+>             RHS (Name : c))
+>             RHS (Num : 0)
+==================================================================================
+Glob.cs306.cfg
+==================================================================================
+GlobInMid.cs306.cfg
+==================================================================================
+GlobPassSameParam.cs306.cfg
+4c4
+<          b : 0.00
+---
+>          b : 0
+15c16
+<          d : 0.00
+---
+>          d : 0
+==================================================================================
+GlobUse.cs306.cfg
+==================================================================================
+IfRetVal.c.013t.cfg
+==================================================================================
+IfRetVal.cs306.cfg
+==================================================================================
+mul_fun.cs306.cfg
+==================================================================================
+MultFn.cs306.cfg
+==================================================================================
+NoFnCall.cs306.cfg
+==================================================================================
+NoRet.cs306.cfg
+==================================================================================
+OperationParam.cs306.cfg
+==================================================================================
+OperationRet.cs306.cfg
+18c19
+<          b : 2.30
+---
+>          b : 2.3
+20c21
+<          d : 3.60
+---
+>          d : 3.6
+45c48
+<          b : 2.30
+---
+>          b : 2.3
+47c50
+<          d : 3.60
+---
+>          d : 3.6
+==================================================================================
+ParamActualSame.cs306.cfg
+==================================================================================
+PassParam.cs306.cfg
+==================================================================================
+PassParamDiff.cs306.cfg
+17,18c18,19
+<          b : 10.00
+<          c : 10.00
+---
+>          b : 10
+>          c : 10
+27,28c30,31
+<          b : 10.00
+<          c : 10.00
+---
+>          b : 10
+>          c : 10
+==================================================================================
+PassParamRet.cs306.cfg
+18c19
+<          b : 1.40
+---
+>          b : 1.4
+34c37
+<          b : 1.40
+---
+>          b : 1.4
+==================================================================================
+RecurCall.cs306.cfg
+30,74d30
+<          Asgn:
+<             LHS (Name : c)
+<             RHS (Name : d)
+<          c : 2
+< 
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : d)
+<                RHS (Num : 0)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition False : Goto (BB 4)
+< 
+<       Basic Block: 4
+<    Evaluating Procedure << fn >>
+<       Local Variables (before evaluating):
+<          c : undefined
+<          d : 1
+< 
+< 
+<       Basic Block: 2
+< 
+<          Asgn:
+<             LHS (Name : c)
+<             RHS (Name : d)
+<          c : 1
+< 
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : d)
+<                RHS (Num : 0)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition False : Goto (BB 4)
+< 
+<       Basic Block: 4
+<    Evaluating Procedure << fn >>
+<       Local Variables (before evaluating):
+<          c : undefined
+<          d : 0
+< 
+< 
+<       Basic Block: 2
+79,150c35
+<          c : 0
+< 
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : d)
+<                RHS (Num : 0)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition True : Goto (BB 3)
+< 
+<       Basic Block: 3
+< 
+<          Goto statement:
+<             Successor: 5
+<          GOTO (BB 5)
+< 
+<       Basic Block: 5
+< 
+<          Asgn:
+<             LHS (Name : c)
+<             RHS (
+<             Arith: PLUS
+<                LHS (Name : d)
+<                RHS (Num : 1000))
+<          c : 1000
+< 
+< 
+<          RETURN <NOTHING>
+< 
+< 
+<       Local Variables (after evaluating) Function: << fn >>
+<          c : 1000
+<          d : 0
+< 
+<       Basic Block: 5
+< 
+<          Asgn:
+<             LHS (Name : c)
+<             RHS (
+<             Arith: PLUS
+<                LHS (Name : d)
+<                RHS (Num : 1000))
+<          c : 1001
+< 
+< 
+<          RETURN <NOTHING>
+< 
+< 
+<       Local Variables (after evaluating) Function: << fn >>
+<          c : 1001
+<          d : 1
+< 
+<       Basic Block: 5
+< 
+<          Asgn:
+<             LHS (Name : c)
+<             RHS (
+<             Arith: PLUS
+<                LHS (Name : d)
+<                RHS (Num : 1000))
+<          c : 1002
+< 
+< 
+<          RETURN <NOTHING>
+< 
+< 
+<       Local Variables (after evaluating) Function: << fn >>
+<          c : 1002
+<          d : 2
+< 
+<          RETURN <NOTHING>
+---
+>          c : 2
+153,156d37
+<       Local Variables (after evaluating) Function: << main >>
+<          a : 2
+<          b : 5
+<    Global Variables (after evaluating):
+==================================================================================
+recursion.cs306.cfg
+31,56d31
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : n1)
+<                RHS (Num : 1)
+<             True Successor: 4
+<             False Successor: 3
+<          Condition False : Goto (BB 3)
+< 
+<       Basic Block: 3
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : n1)
+<                RHS (Num : 0)
+<             True Successor: 4
+<             False Successor: 5
+<          Condition False : Goto (BB 5)
+< 
+<       Basic Block: 5
+<    Evaluating Procedure << fact >>
+<       Local Variables (before evaluating):
+<          D1234 : undefined
+<          n1 : 4
+< 
+< 
+<       Basic Block: 2
+68,147d42
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : n1)
+<                RHS (Num : 0)
+<             True Successor: 4
+<             False Successor: 5
+<          Condition False : Goto (BB 5)
+< 
+<       Basic Block: 5
+<    Evaluating Procedure << fact >>
+<       Local Variables (before evaluating):
+<          D1234 : undefined
+<          n1 : 3
+< 
+< 
+<       Basic Block: 2
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : n1)
+<                RHS (Num : 1)
+<             True Successor: 4
+<             False Successor: 3
+<          Condition False : Goto (BB 3)
+< 
+<       Basic Block: 3
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : n1)
+<                RHS (Num : 0)
+<             True Successor: 4
+<             False Successor: 5
+<          Condition False : Goto (BB 5)
+< 
+<       Basic Block: 5
+<    Evaluating Procedure << fact >>
+<       Local Variables (before evaluating):
+<          D1234 : undefined
+<          n1 : 2
+< 
+< 
+<       Basic Block: 2
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : n1)
+<                RHS (Num : 1)
+<             True Successor: 4
+<             False Successor: 3
+<          Condition False : Goto (BB 3)
+< 
+<       Basic Block: 3
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : n1)
+<                RHS (Num : 0)
+<             True Successor: 4
+<             False Successor: 5
+<          Condition False : Goto (BB 5)
+< 
+<       Basic Block: 5
+<    Evaluating Procedure << fact >>
+<       Local Variables (before evaluating):
+<          D1234 : undefined
+<          n1 : 1
+< 
+< 
+<       Basic Block: 2
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : n1)
+<                RHS (Num : 1)
+<             True Successor: 4
+<             False Successor: 3
+<          Condition True : Goto (BB 4)
+< 
+<       Basic Block: 4
+149,280d43
+<          Asgn:
+<             LHS (Name : D1234)
+<             RHS (Num : 1)
+<          D1234 : 1
+< 
+< 
+<          Goto statement:
+<             Successor: 6
+<          GOTO (BB 6)
+< 
+<       Basic Block: 6
+< 
+<          RETURN Name : D1234
+< 
+< 
+<       Local Variables (after evaluating) Function: << fact >>
+<          D1234 : 1
+<          n1 : 1
+<          return : 1
+< 
+<          Asgn:
+<             LHS (Name : D1234)
+<             RHS (
+<             Arith: MULT
+<                LHS (
+<          FN CALL: fact(
+<             
+<             Arith: PLUS
+<                LHS (Name : n1)
+<                RHS (Num : -1)))
+<                RHS (Name : n1))
+<          D1234 : 2
+< 
+< 
+<       Basic Block: 6
+< 
+<          RETURN Name : D1234
+< 
+< 
+<       Local Variables (after evaluating) Function: << fact >>
+<          D1234 : 2
+<          n1 : 2
+<          return : 2
+< 
+<          Asgn:
+<             LHS (Name : D1234)
+<             RHS (
+<             Arith: MULT
+<                LHS (
+<          FN CALL: fact(
+<             
+<             Arith: PLUS
+<                LHS (Name : n1)
+<                RHS (Num : -1)))
+<                RHS (Name : n1))
+<          D1234 : 6
+< 
+< 
+<       Basic Block: 6
+< 
+<          RETURN Name : D1234
+< 
+< 
+<       Local Variables (after evaluating) Function: << fact >>
+<          D1234 : 6
+<          n1 : 3
+<          return : 6
+< 
+<          Asgn:
+<             LHS (Name : D1234)
+<             RHS (
+<             Arith: MULT
+<                LHS (
+<          FN CALL: fact(
+<             
+<             Arith: PLUS
+<                LHS (Name : n1)
+<                RHS (Num : -1)))
+<                RHS (Name : n1))
+<          D1234 : 24
+< 
+< 
+<       Basic Block: 6
+< 
+<          RETURN Name : D1234
+< 
+< 
+<       Local Variables (after evaluating) Function: << fact >>
+<          D1234 : 24
+<          n1 : 4
+<          return : 24
+< 
+<          Asgn:
+<             LHS (Name : D1234)
+<             RHS (
+<             Arith: MULT
+<                LHS (
+<          FN CALL: fact(
+<             
+<             Arith: PLUS
+<                LHS (Name : n1)
+<                RHS (Num : -1)))
+<                RHS (Name : n1))
+<          D1234 : 120
+< 
+< 
+<       Basic Block: 6
+< 
+<          RETURN Name : D1234
+< 
+< 
+<       Local Variables (after evaluating) Function: << fact >>
+<          D1234 : 120
+<          n1 : 5
+<          return : 120
+< 
+<          Asgn:
+<             LHS (Name : f)
+<             RHS (
+<          FN CALL: fact(
+<             Name : n))
+<          f : 120
+< 
+< 
+<          RETURN <NOTHING>
+< 
+< 
+<       Local Variables (after evaluating) Function: << main >>
+<          b : 1
+<          f : 120
+<          n : 5
+<    Global Variables (after evaluating):
+==================================================================================
+recursivecall.cs306.cfg
+25,314d25
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : a)
+<                RHS (Num : 1)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition False : Goto (BB 4)
+< 
+<       Basic Block: 4
+<    Evaluating Procedure << r >>
+<       Local Variables (before evaluating):
+<          D1234 : undefined
+<          a : 4
+< 
+< 
+<       Basic Block: 2
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : a)
+<                RHS (Num : 1)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition False : Goto (BB 4)
+< 
+<       Basic Block: 4
+<    Evaluating Procedure << r >>
+<       Local Variables (before evaluating):
+<          D1234 : undefined
+<          a : 3
+< 
+< 
+<       Basic Block: 2
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : a)
+<                RHS (Num : 1)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition False : Goto (BB 4)
+< 
+<       Basic Block: 4
+<    Evaluating Procedure << r >>
+<       Local Variables (before evaluating):
+<          D1234 : undefined
+<          a : 2
+< 
+< 
+<       Basic Block: 2
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : a)
+<                RHS (Num : 1)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition False : Goto (BB 4)
+< 
+<       Basic Block: 4
+<    Evaluating Procedure << r >>
+<       Local Variables (before evaluating):
+<          D1234 : undefined
+<          a : 1
+< 
+< 
+<       Basic Block: 2
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : a)
+<                RHS (Num : 1)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition True : Goto (BB 3)
+< 
+<       Basic Block: 3
+< 
+<          Asgn:
+<             LHS (Name : D1234)
+<             RHS (Num : 1)
+<          D1234 : 1
+< 
+< 
+<          Goto statement:
+<             Successor: 5
+<          GOTO (BB 5)
+< 
+<       Basic Block: 5
+< 
+<          RETURN Name : D1234
+< 
+< 
+<       Local Variables (after evaluating) Function: << r >>
+<          D1234 : 1
+<          a : 1
+<          return : 1
+< 
+<          Asgn:
+<             LHS (Name : D1234)
+<             RHS (
+<             Arith: PLUS
+<                LHS (
+<          FN CALL: r(
+<             
+<             Arith: PLUS
+<                LHS (Name : a)
+<                RHS (Num : -1)))
+<                RHS (Num : 1))
+<          D1234 : 2
+< 
+< 
+<       Basic Block: 5
+< 
+<          RETURN Name : D1234
+< 
+< 
+<       Local Variables (after evaluating) Function: << r >>
+<          D1234 : 2
+<          a : 2
+<          return : 2
+< 
+<          Asgn:
+<             LHS (Name : D1234)
+<             RHS (
+<             Arith: PLUS
+<                LHS (
+<          FN CALL: r(
+<             
+<             Arith: PLUS
+<                LHS (Name : a)
+<                RHS (Num : -1)))
+<                RHS (Num : 1))
+<          D1234 : 3
+< 
+< 
+<       Basic Block: 5
+< 
+<          RETURN Name : D1234
+< 
+< 
+<       Local Variables (after evaluating) Function: << r >>
+<          D1234 : 3
+<          a : 3
+<          return : 3
+< 
+<          Asgn:
+<             LHS (Name : D1234)
+<             RHS (
+<             Arith: PLUS
+<                LHS (
+<          FN CALL: r(
+<             
+<             Arith: PLUS
+<                LHS (Name : a)
+<                RHS (Num : -1)))
+<                RHS (Num : 1))
+<          D1234 : 4
+< 
+< 
+<       Basic Block: 5
+< 
+<          RETURN Name : D1234
+< 
+< 
+<       Local Variables (after evaluating) Function: << r >>
+<          D1234 : 4
+<          a : 4
+<          return : 4
+< 
+<          Asgn:
+<             LHS (Name : D1234)
+<             RHS (
+<             Arith: PLUS
+<                LHS (
+<          FN CALL: r(
+<             
+<             Arith: PLUS
+<                LHS (Name : a)
+<                RHS (Num : -1)))
+<                RHS (Num : 1))
+<          D1234 : 5
+< 
+< 
+<       Basic Block: 5
+< 
+<          RETURN Name : D1234
+< 
+< 
+<       Local Variables (after evaluating) Function: << r >>
+<          D1234 : 5
+<          a : 5
+<          return : 5
+< 
+<          Asgn:
+<             LHS (Name : y)
+<             RHS (
+<          FN CALL: r(
+<             Name : x))
+<          y : 5
+< 
+<    Evaluating Procedure << r >>
+<       Local Variables (before evaluating):
+<          D1234 : undefined
+<          a : 3
+< 
+< 
+<       Basic Block: 2
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : a)
+<                RHS (Num : 1)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition False : Goto (BB 4)
+< 
+<       Basic Block: 4
+<    Evaluating Procedure << r >>
+<       Local Variables (before evaluating):
+<          D1234 : undefined
+<          a : 2
+< 
+< 
+<       Basic Block: 2
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : a)
+<                RHS (Num : 1)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition False : Goto (BB 4)
+< 
+<       Basic Block: 4
+<    Evaluating Procedure << r >>
+<       Local Variables (before evaluating):
+<          D1234 : undefined
+<          a : 1
+< 
+< 
+<       Basic Block: 2
+< 
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (Name : a)
+<                RHS (Num : 1)
+<             True Successor: 3
+<             False Successor: 4
+<          Condition True : Goto (BB 3)
+< 
+<       Basic Block: 3
+< 
+<          Asgn:
+<             LHS (Name : D1234)
+<             RHS (Num : 1)
+<          D1234 : 1
+< 
+< 
+<          Goto statement:
+<             Successor: 5
+<          GOTO (BB 5)
+< 
+<       Basic Block: 5
+< 
+<          RETURN Name : D1234
+< 
+< 
+<       Local Variables (after evaluating) Function: << r >>
+<          D1234 : 1
+<          a : 1
+<          return : 1
+< 
+<          Asgn:
+<             LHS (Name : D1234)
+<             RHS (
+<             Arith: PLUS
+<                LHS (
+<          FN CALL: r(
+<             
+<             Arith: PLUS
+<                LHS (Name : a)
+<                RHS (Num : -1)))
+<                RHS (Num : 1))
+<          D1234 : 2
+< 
+< 
+<       Basic Block: 5
+< 
+<          RETURN Name : D1234
+316,361d26
+< 
+<       Local Variables (after evaluating) Function: << r >>
+<          D1234 : 2
+<          a : 2
+<          return : 2
+< 
+<          Asgn:
+<             LHS (Name : D1234)
+<             RHS (
+<             Arith: PLUS
+<                LHS (
+<          FN CALL: r(
+<             
+<             Arith: PLUS
+<                LHS (Name : a)
+<                RHS (Num : -1)))
+<                RHS (Num : 1))
+<          D1234 : 3
+< 
+< 
+<       Basic Block: 5
+< 
+<          RETURN Name : D1234
+< 
+< 
+<       Local Variables (after evaluating) Function: << r >>
+<          D1234 : 3
+<          a : 3
+<          return : 3
+< 
+<          Asgn:
+<             LHS (Name : z)
+<             RHS (
+<          FN CALL: r(
+<             Num : 3))
+<          z : 3
+< 
+< 
+<          RETURN <NOTHING>
+< 
+< 
+<       Local Variables (after evaluating) Function: << main >>
+<          x : 5
+<          y : 5
+<          z : 3
+<    Global Variables (after evaluating):
+==================================================================================
+return_float.cs306.cfg
+47d49
+<          return : 18.50
+48a51
+>             return : 18.50
+==================================================================================
+ReturnType.cs306.cfg
+==================================================================================
+RetVal.cs306.cfg
+==================================================================================
+t2.cs306.cfg
+11,15c11
+<          If_Else statement:
+<             Condition: EQ
+<                LHS (
+<          FN CALL: fun())
+<                RHS (Num : 3)   Evaluating Procedure << fun >>
+---
+>    Evaluating Procedure << fun >>
+54a53,57
+>          If_Else statement:            
+>          Condition: EQ
+>             LHS (
+>             FN CALL: fun())
+>             RHS (Num : 3)
+==================================================================================
+test.cs306.cfg
+==================================================================================
+VoidFnPassParam.cs306.cfg
+==================================================================================
+void_function.cs306.cfg
+==================================================================================
+VoidRet.cs306.cfg
+==================================================================================

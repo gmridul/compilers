@@ -74,7 +74,9 @@ bool Eval_Result_Return::is_variable_defined() {
 void Eval_Result_Return::set_Eval(Eval_Result * etemp, Result_Enum r) {
     if(r==int_result) {
         int_defined=true;
-        e=etemp;
+       
+        //cout<<etemp->get_value() << "in seteval\n";
+        
     }
 
     if(r==float_result) {

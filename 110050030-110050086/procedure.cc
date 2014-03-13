@@ -38,7 +38,7 @@ using namespace std;
 
 Procedure::Procedure(Data_Type proc_return_type, string proc_name, list<Symbol_Table_Entry * > plist)
 {
-	eval_env = new Local_Environment();
+	//evaluated = *new list<Eval_Result * >();
 	return_type = proc_return_type;
 	name = proc_name;
     parameter_list = plist;
@@ -65,14 +65,11 @@ void Procedure::set_local_list(Symbol_Table & new_list)
 {
 	list<Symbol_Table_Entry * >  parameter_list_temp = new_list.variable_table;
 	list<Symbol_Table_Entry * >::iterator it=parameter_list_temp.begin();
-   // cout << parameter_list_temp.size() << "list size\n";
     for(;it!=parameter_list_temp.end();it++) {
         if((*it)) {
-     //       cout << (*it)->variable_name<<"in set_local_list\n";
             local_symbol_table.push_symbol(*it);
         }
     }
-    //cout << parameter_list_temp.size() << "list size\n";
 	local_symbol_table.set_table_scope(local);
     //list<Symbol_Table_Entry * > parameter_list_temp;
     
@@ -83,14 +80,11 @@ void Procedure::push_parameter_list(){
 local_symbol_table.set_table_scope(local);
 
 	list<Symbol_Table_Entry * >::iterator it=parameter_list.begin();
-    //cout << parameter_list.size() << "list size\n";
     for(;it!=parameter_list.end();it++) {
         if((*it)) {
-      //      cout << (*it)->variable_name<<"in set_local_list\n";
             local_symbol_table.push_symbol(*it);
         }
     }
-    //cout << parameter_list.size() << "list size\n";
 }
 
 
@@ -118,12 +112,13 @@ void Procedure::print_ast(ostream & file_buffer)
 		(*i)->print_bb(file_buffer);
 }
 
-void Procedure::put_variable_value(list<Eval_Result* > & value) {
-    list<Eval_Result* >::iterator it=value.begin();
+void Procedure::put_variable_value(Local_Environment & eval_env) {
+    list<Eval_Result* >::iterator it=evaluated.begin();
     list<Symbol_Table_Entry * >::iterator it1=parameter_list.begin();
-    for(; it!=value.end()||it1!=parameter_list.end();it++,it1++) {
-        eval_env->put_variable_value(**it,(*it1)->get_variable_name());
-    }
+    if((*it1)==NULL) return;
+    for(; it!=evaluated.end()||it1!=parameter_list.end();it++,it1++) {
+        eval_env.put_variable_value(**it,(*it1)->get_variable_name());
+        }
 }
 	
 Basic_Block & Procedure::get_start_basic_block()
@@ -185,25 +180,37 @@ Basic_Block * Procedure::goto_bb(Basic_Block & current_bb, Eval_Result* result)
 
 Eval_Result & Procedure::evaluate(ostream & file_buffer)
 {
+	Local_Environment * eval_env =  new Local_Environment();
+	
+	put_variable_value(*eval_env);
 	local_symbol_table.create(*eval_env);
 	
 	Eval_Result * result = NULL;
 
-	file_buffer << PROC_SPACE << "Evaluating Procedure " << name << "\n";
+	file_buffer << PROC_SPACE << "Evaluating Procedure " << "<< "<<name<<" >>" << "\n";
 	file_buffer << LOC_VAR_SPACE << "Local Variables (before evaluating):\n";
 	eval_env->print(file_buffer);
 	file_buffer << "\n";
-	
 	Basic_Block * current_bb = &(get_start_basic_block());
 	while (current_bb)
 	{
+        
 		result = &(current_bb->evaluate(*eval_env, file_buffer));
 		current_bb = goto_bb(*current_bb, result);		
 	}
 
 	file_buffer << "\n\n";
-	file_buffer << LOC_VAR_SPACE << "Local Variables (after evaluating):\n";
+	file_buffer << LOC_VAR_SPACE << "Local Variables (after evaluating) Function: << "<<name<<" >>\n";
 	eval_env->print(file_buffer);
+    if(result->get_result_enum()!=return_result_void) {
+        if(result->get_result_enum()==int_result)  {
+           file_buffer<<AST_NODE_SPACE<<"return : "<<result->main_result_int<<"\n";
+        }
+        else if(result->get_result_enum()==float_result) {
+            file_buffer<<AST_NODE_SPACE<<"return : "<<result->main_result_float<<"\n";
+        }
+    }
+	//eval_env->print(file_buffer);
 
 	return *result;
 }

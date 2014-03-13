@@ -111,7 +111,9 @@ void Symbol_Table::create(Local_Environment & local_global_variables_table)
                 j->set_variable_status(true);
                 j->set_value(0);
             }
-            local_global_variables_table.put_variable_value(*j, name);
+            Eval_Result * vi = local_global_variables_table.variable_table[name];
+            if (vi == NULL)
+				local_global_variables_table.put_variable_value(*j, name);
         }
         else if(type==float_data_type) {
             Eval_Result_Value_Float* j = new Eval_Result_Value_Float();
@@ -120,6 +122,8 @@ void Symbol_Table::create(Local_Environment & local_global_variables_table)
                 j->set_variable_status(true);
                 j->set_value(0);
             }
+            Eval_Result * vi = local_global_variables_table.variable_table[name];
+            if (vi == NULL)
             local_global_variables_table.put_variable_value(*j, name);
         }
 	}
@@ -128,7 +132,9 @@ void Symbol_Table::create(Local_Environment & local_global_variables_table)
 /////////////////////////////////////////////////////////////
 
 Symbol_Table_Entry::Symbol_Table_Entry()
-{}
+{
+    variable_name="check";
+}
 
 Symbol_Table_Entry::Symbol_Table_Entry(string & name, Data_Type new_data_type)
 {

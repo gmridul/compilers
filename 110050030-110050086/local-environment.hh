@@ -37,7 +37,8 @@ typedef enum
     float_result,
 	void_result,
     goto_result,
-    return_result
+    return_result_void,
+    return_result_notvoid
 } Result_Enum;
 
 class Eval_Result;
@@ -49,6 +50,8 @@ protected:
 	Result_Enum result_type;
 
 public:
+	int main_result_int;
+	float main_result_float;
 	virtual int get_value();
 	virtual void set_value(int value);
 	virtual void set_floatvalue(float number);
@@ -170,9 +173,10 @@ public:
 
 class Local_Environment
 {
+	public:
 	map<string, Eval_Result *> variable_table;
 
-public:
+
 	Local_Environment();
 	~Local_Environment();
 
